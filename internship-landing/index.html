@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стажировка в КАЧ — Твой карьер</title>
+<style>
+@font-face { font-family: 'Gros Ventre'; src: url('fonts/Gros Ventre Regular.ttf'); font-weight: normal; }
+@font-face { font-family: 'Gros Ventre'; src: url('fonts/Gros Ventre Bold.ttf'); font-weight: bold; }
+@font-face { font-family: 'Gros Ventre'; src: url('fonts/Gros Ventre Light.ttf'); font-weight: 300; }
+@font-face { font-family: 'Gros Ventre'; src: url('fonts/Gros Ventre Thin.ttf'); font-weight: 100; }
+@font-face { font-family: 'Gros Ventre'; src: url('fonts/Gros Ventre Semibold.ttf'); font-weight: 600; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0d0d0d; color: #f8f8f8; font-family: 'Golos Text', sans-serif; overflow-x: hidden; cursor: default; }
+.gv { font-family: 'Gros Ventre', sans-serif; }
+
+/* ====== MOLE GUIDE ====== */
+#mole {
+  position: fixed; bottom: 30px; left: 30px; z-index: 9999;
+  width: 80px; height: 80px; cursor: pointer; transition: transform 0.3s;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+#mole:hover { transform: scale(1.2) rotate(-10deg); }
+#mole-bubble {
+  position: fixed; bottom: 120px; left: 30px; z-index: 9999;
+  background: #FFE100; color: #0d0d0d; padding: 12px 20px; border-radius: 16px 16px 16px 4px;
+  font-size: 14px; font-weight: 600; max-width: 260px; opacity: 0;
+  transform: translateY(10px); transition: all 0.3s; pointer-events: none;
+}
+#mole-bubble.show { opacity: 1; transform: translateY(0); }
+
+/* ====== HERO ====== */
+.hero {
+  height: 100vh; min-height: 700px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 60px;
+}
+.hero-bg-text {
+  position: absolute; top: -8vh; left: -2%; font-size: clamp(200px, 28vw, 500px);
+  line-height: 0.75; letter-spacing: -0.03em; color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,225,0,0.15); white-space: nowrap;
+  user-select: none; pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-badge {
+  display: inline-block; background: #FFE100; color: #0d0d0d; padding: 8px 24px;
+  font-size: 12px; font-weight: 800; letter-spacing: 3px; transform: rotate(-3deg);
+  margin-bottom: 30px;
+}
+.hero h1 { font-size: clamp(60px, 10vw, 160px); line-height: 0.82; letter-spacing: -0.05em; margin-bottom: 10px; }
+.hero h1 .yellow { color: #FFE100; font-size: clamp(80px, 14vw, 220px); display: block; }
+.hero-sub { color: #999; font-size: 18px; margin-top: 30px; max-width: 400px; line-height: 1.4; }
+.hero-cta {
+  display: inline-block; margin-top: 40px; padding: 18px 48px; border: 2px solid #f8f8f8;
+  color: #f8f8f8; font-size: 16px; font-weight: 600; text-decoration: none;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.hero-cta:hover { background: #FFE100; color: #0d0d0d; border-color: #FFE100; }
+.hero-img {
+  position: absolute; right: -5%; top: 0; width: 55%; height: 100%;
+  background: url('https://images.unsplash.com/photo-1569880153113-76d33f3e03f1?w=1200') center/cover;
+  mask-image: linear-gradient(to left, black 60%, transparent);
+  -webkit-mask-image: linear-gradient(to left, black 60%, transparent);
+}
+/* floating shapes */
+.hero .shape {
+  position: absolute; border-radius: 50%; pointer-events: none; opacity: 0.08;
+}
+.hero .shape-1 { width: 400px; height: 400px; background: #FFE100; top: 10%; right: 30%; animation: float1 8s ease-in-out infinite; }
+.hero .shape-2 { width: 200px; height: 200px; background: #FF3B30; bottom: 20%; left: 40%; animation: float2 6s ease-in-out infinite; }
+@keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(30px,-40px); } }
+@keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-20px,30px); } }
+
+/* ====== MARQUEE ====== */
+.marquee-strip {
+  background: #FFE100; padding: 18px 0; overflow: hidden; white-space: nowrap;
+}
+.marquee-inner {
+  display: inline-block; animation: marquee 20s linear infinite;
+  font-size: 16px; font-weight: 800; letter-spacing: 4px; color: #0d0d0d;
+}
+.marquee-inner .ghost { opacity: 0.3; }
+.marquee-inner .hot { color: #FF3B30; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ====== ЗАЛЕЖИ ====== */
+.deposits {
+  min-height: 100vh; background: #f8f8f8; color: #0d0d0d; position: relative;
+  padding: 80px 60px; overflow: hidden;
+}
+.deposits-title { font-size: clamp(100px, 16vw, 300px); line-height: 0.78; letter-spacing: -0.05em; position: relative; z-index: 2; }
+.deposits-sub { font-size: clamp(50px, 7vw, 130px); line-height: 0.9; letter-spacing: -0.03em; text-align: right; margin-top: -20px; position: relative; z-index: 2; }
+.deposits-note { color: #999; font-size: 18px; line-height: 1.5; max-width: 350px; margin-top: 40px; }
+.deposits-img {
+  width: 70%; height: 500px; margin-top: 40px; margin-left: auto;
+  background: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200') center/cover;
+  border-radius: 0;
+}
+
+/* ====== ИНСТРУМЕНТЫ ====== */
+.tools { background: #0d0d0d; padding: 100px 60px; }
+.tools-note { color: #999; font-size: 18px; margin-bottom: 60px; }
+.tool-row {
+  display: flex; align-items: baseline; gap: 24px; padding: 30px 0;
+  border-bottom: 1px solid #1a1a1a; cursor: pointer; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.tool-row::before {
+  content: ''; position: absolute; left: 0; top: 0; width: 0; height: 100%;
+  background: #FFE10008; transition: width 0.5s;
+}
+.tool-row:hover::before { width: 100%; }
+.tool-row:hover .tool-name { color: #FFE100; }
+.tool-name {
+  font-size: clamp(40px, 5vw, 80px); line-height: 0.85; letter-spacing: -0.03em;
+  transition: color 0.3s; min-width: 300px; position: relative; z-index: 1;
+}
+.tool-dash { color: #333; font-size: 24px; position: relative; z-index: 1; }
+.tool-desc { color: #999; font-size: 20px; font-weight: 500; line-height: 1.3; position: relative; z-index: 1; }
+.tool-row:hover .tool-desc { color: #f8f8f8; }
+
+/* ====== КАМНИ ====== */
+.stones {
+  height: 80vh; min-height: 500px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.stones-grid {
+  display: grid; grid-template-columns: repeat(20, 1fr); grid-template-rows: repeat(12, 1fr);
+  width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+}
+.stone {
+  width: 100%; height: 100%; background: #111; border-radius: 40%; border: 1px solid #0d0d0d;
+  transition: all 0.6s; cursor: default;
+}
+.stone.special {
+  background: radial-gradient(circle, #FF8855, #FF3B30, #8B2020);
+  box-shadow: 0 0 30px #FF3B3060, 0 0 80px #FF3B3030;
+  animation: pulse-stone 2s ease-in-out infinite; cursor: pointer; border: none;
+}
+.stone.special:hover { transform: scale(1.8); box-shadow: 0 0 60px #FF3B30, 0 0 120px #FF3B3060; }
+@keyframes pulse-stone { 0%,100% { box-shadow: 0 0 30px #FF3B3060, 0 0 80px #FF3B3030; } 50% { box-shadow: 0 0 50px #FF3B3080, 0 0 120px #FF3B3050; } }
+.stones-text {
+  position: relative; z-index: 2; text-align: center; pointer-events: none;
+}
+.stones-text h2 { font-size: clamp(60px, 10vw, 180px); line-height: 0.8; letter-spacing: -0.04em; text-shadow: 0 0 80px #000, 0 0 40px #000; }
+.stones-text .accent-tag {
+  display: inline-block; background: #FF3B30; padding: 10px 30px;
+  font-size: 20px; font-weight: 700; transform: rotate(2deg); margin-top: 20px;
+  pointer-events: auto; cursor: default;
+}
+
+/* ====== ВЫБОР ====== */
+.choice { background: #f8f8f8; color: #0d0d0d; padding: 100px 60px; min-height: 100vh; position: relative; overflow: hidden; }
+.choice-title { font-size: clamp(80px, 13vw, 260px); line-height: 0.78; letter-spacing: -0.05em; }
+.choice-sub { font-size: clamp(40px, 7vw, 160px); line-height: 0.82; letter-spacing: -0.03em; color: #0d0d0d50; text-align: right; }
+.geodes {
+  display: flex; justify-content: center; gap: 120px; margin-top: 80px;
+  align-items: center; flex-wrap: wrap;
+}
+.geode {
+  text-align: center; cursor: pointer; transition: transform 0.4s;
+}
+.geode:hover { transform: scale(1.08) rotate(-3deg); }
+.geode-img {
+  width: 280px; height: 280px; border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+  object-fit: cover; transition: all 0.4s;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+}
+.geode:first-child .geode-img { border-radius: 50% 45% 55% 48% / 45% 55% 48% 52%; }
+.geode-label { margin-top: 24px; font-size: 28px; font-weight: normal; }
+.geode-sub { color: #999; font-size: 16px; margin-top: 8px; }
+.geode-cta {
+  display: inline-block; background: #FFE100; color: #0d0d0d; padding: 14px 40px;
+  font-weight: 800; font-size: 18px; margin-top: 20px; transform: rotate(-4deg);
+  transition: all 0.3s; text-decoration: none;
+}
+.geode-cta:hover { transform: rotate(0deg) scale(1.05); background: #FF3B30; color: #f8f8f8; }
+.choice-quote {
+  color: #0d0d0d40; font-style: italic; font-size: 16px; max-width: 300px;
+  margin: 60px auto 0; text-align: center; line-height: 1.5;
+}
+
+/* ====== REVEAL ANIMATIONS ====== */
+.reveal { opacity: 0; transform: translateY(60px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-80px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(80px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* parallax cursor */
+.parallax-layer { transition: transform 0.15s ease-out; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- MOLE GUIDE -->
+<div id="mole" onclick="moleSay()">
+  <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="40" cy="48" rx="28" ry="26" fill="#5C3D2E"/>
+    <ellipse cx="40" cy="42" rx="22" ry="20" fill="#7B5544"/>
+    <ellipse cx="40" cy="52" rx="14" ry="10" fill="#E8C9A8"/>
+    <ellipse cx="40" cy="50" rx="5" ry="3" fill="#3A2215"/>
+    <ellipse cx="33" cy="40" rx="3" ry="2" fill="#1a1a1a"/>
+    <ellipse cx="47" cy="40" rx="3" ry="2" fill="#1a1a1a"/>
+    <rect x="22" y="18" rx="8" width="36" height="22" fill="#FFE100"/>
+    <rect x="32" y="10" rx="4" width="16" height="14" fill="#FFE100"/>
+    <ellipse cx="40" cy="12" rx="6" ry="5" fill="#FFF3A0"/>
+    <circle cx="40" cy="12" r="3" fill="#FFFFFFCC"/>
+  </svg>
+</div>
+<div id="mole-bubble"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="hero-bg-text gv parallax-layer" data-speed="0.02">КАРЬЕРЪ</div>
+  <div class="hero-img parallax-layer" data-speed="0.03"></div>
+  <div class="hero-content">
+    <div class="hero-badge">НАБОР ОТКРЫТ</div>
+    <h1 class="gv">
+      Стажировка
+      <span class="yellow">в КАЧ</span>
+    </h1>
+    <p class="hero-sub reveal">(спускайся, мы заждались)</p>
+    <a href="#choice" class="hero-cta reveal">хочу на стажировку →</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    ЯНДЕКС АФИША &nbsp;·&nbsp; UZUM &nbsp;·&nbsp; ЯНДЕКС ЕДА &nbsp;·&nbsp; РФС &nbsp;·&nbsp; COFIX &nbsp;·&nbsp; <span class="ghost">???</span> &nbsp;·&nbsp; <span class="ghost">???</span> &nbsp;·&nbsp; <span class="hot">ТЫ?</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    ЯНДЕКС АФИША &nbsp;·&nbsp; UZUM &nbsp;·&nbsp; ЯНДЕКС ЕДА &nbsp;·&nbsp; РФС &nbsp;·&nbsp; COFIX &nbsp;·&nbsp; <span class="ghost">???</span> &nbsp;·&nbsp; <span class="ghost">???</span> &nbsp;·&nbsp; <span class="hot">ТЫ?</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+<!-- ЗАЛЕЖИ -->
+<section class="deposits" id="deposits">
+  <div class="deposits-title gv reveal-left">Залежи</div>
+  <div class="deposits-sub gv reveal-right">проектов</div>
+  <div class="deposits-note reveal">(некоторые зоны открыты, некоторые — locked. поэтому ищем новую пару рук)</div>
+  <div class="deposits-img reveal"></div>
+</section>
+
+<!-- ИНСТРУМЕНТЫ -->
+<section class="tools" id="tools">
+  <div class="tools-note reveal">(что даём в руки?)</div>
+  <div class="tool-row reveal">
+    <div class="tool-name gv">Паёк</div>
+    <div class="tool-dash">—</div>
+    <div class="tool-desc">оплачиваемая стажировка</div>
+  </div>
+  <div class="tool-row reveal">
+    <div class="tool-name gv">Бур</div>
+    <div class="tool-dash">—</div>
+    <div class="tool-desc">кредиты на нейросети</div>
+  </div>
+  <div class="tool-row reveal">
+    <div class="tool-name gv">Фонарь</div>
+    <div class="tool-dash">—</div>
+    <div class="tool-desc">наводки арт-директора</div>
+  </div>
+  <div class="tool-row reveal">
+    <div class="tool-name gv">Карта</div>
+    <div class="tool-dash">—</div>
+    <div class="tool-desc">реальные проекты для реальных клиентов</div>
+  </div>
+  <div class="tool-row reveal">
+    <div class="tool-name gv">Верёвка</div>
+    <div class="tool-dash">—</div>
+    <div class="tool-desc">команда, которая страхует</div>
+  </div>
+  <div class="tool-row reveal">
+    <div class="tool-name gv">Ключ</div>
+    <div class="tool-dash">—</div>
+    <div class="tool-desc">возможность выхода в штат</div>
+  </div>
+</section>
+
+<!-- КАМНИ -->
+<section class="stones" id="stones">
+  <div class="stones-grid" id="stonesGrid"></div>
+  <div class="stones-text">
+    <h2 class="gv">1 000 000</h2>
+    <p class="gv" style="font-size: clamp(30px, 5vw, 80px); letter-spacing: -0.03em; line-height: 0.9; margin-top: 10px;">одинаковых камней</p>
+    <div class="accent-tag">и один — тот самый</div>
+  </div>
+</section>
+
+<!-- ВЫБОР -->
+<section class="choice" id="choice">
+  <div class="choice-title gv reveal-left">Два жеода</div>
+  <div class="choice-sub gv reveal-right">перед тобой</div>
+  <div class="geodes">
+    <div class="geode reveal">
+      <img class="geode-img" src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=600" alt="Открытый жеод">
+      <div class="geode-label gv">Я с вами</div>
+      <div class="geode-sub">(открывается форма)</div>
+      <a href="#" class="geode-cta">подать заявку →</a>
+    </div>
+    <div class="geode reveal">
+      <img class="geode-img" src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=600" alt="Закрытый жеод" style="filter: saturate(0.2) brightness(0.7) drop-shadow(0 20px 40px rgba(0,0,0,0.2));">
+      <div class="geode-label gv">Пока не готов</div>
+      <div class="geode-sub">(но можно вернуться)</div>
+    </div>
+  </div>
+  <div class="choice-quote reveal">Проводник: «красивый камень. когда будешь готов — мы здесь.»</div>
+</section>
+
+<script>
+// ====== STONES GRID ======
+const grid = document.getElementById('stonesGrid');
+const total = 240;
+const specialIdx = Math.floor(Math.random() * 60) + 90; // somewhere in middle
+for (let i = 0; i < total; i++) {
+  const s = document.createElement('div');
+  s.className = 'stone';
+  const shade = 17 + Math.floor(Math.random() * 12);
+  s.style.background = `rgb(${shade},${shade},${shade})`;
+  s.style.borderRadius = `${35+Math.random()*20}% ${35+Math.random()*20}% ${35+Math.random()*20}% ${35+Math.random()*20}%`;
+  if (i === specialIdx) {
+    s.className = 'stone special';
+    s.style.background = '';
+    s.title = 'Ты нашёл его!';
+    s.onclick = () => { moleSayText('Ты нашёл тот самый камень! 💎'); s.style.transform = 'scale(2) rotate(10deg)'; };
+  }
+  grid.appendChild(s);
+}
+
+// ====== SCROLL REVEAL ======
+const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+
+// ====== PARALLAX ON MOUSE ======
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5);
+  const y = (e.clientY / window.innerHeight - 0.5);
+  document.querySelectorAll('.parallax-layer').forEach(el => {
+    const speed = parseFloat(el.dataset.speed) || 0.02;
+    el.style.transform = `translate(${x * speed * 100}px, ${y * speed * 100}px)`;
+  });
+});
+
+// ====== MOLE GUIDE ======
+const moleQuotes = [
+  'А, это ты. Мы уже заждались.',
+  'Не объясняю, кто рассказывал. Не уточняет.',
+  'Видишь закрытые зоны? Это для тебя.',
+  'Здесь нужен намётанный глаз.',
+  'Один неверный удар — пыль. Один точный — жеода.',
+  'Мы — те, кто спускается и достаёт чудо.',
+  'Если мы друг другу понравимся — ключ твой.',
+  'Наконец-то дошёл!',
+];
+let moleIdx = 0;
+function moleSay() {
+  moleSayText(moleQuotes[moleIdx % moleQuotes.length]);
+  moleIdx++;
+}
+function moleSayText(text) {
+  const bubble = document.getElementById('mole-bubble');
+  bubble.textContent = text;
+  bubble.classList.add('show');
+  clearTimeout(bubble._timer);
+  bubble._timer = setTimeout(() => bubble.classList.remove('show'), 3500);
+}
+// Auto greet
+setTimeout(() => moleSayText('А, это ты. Мы уже заждались.'), 2000);
+
+// ====== TOOL ROW HOVER SOUND-LIKE EFFECT ======
+document.querySelectorAll('.tool-row').forEach((row, i) => {
+  row.addEventListener('mouseenter', () => {
+    row.style.paddingLeft = '20px';
+    row.style.transition = 'all 0.3s';
+  });
+  row.addEventListener('mouseleave', () => {
+    row.style.paddingLeft = '0';
+  });
+});
+</script>
+</body>
+</html>
