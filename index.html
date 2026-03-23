@@ -174,13 +174,71 @@
   }
   .hero__title-line--dim { color: var(--white); }
   .hero__title-line--bright { color: var(--pure-white); }
+  .desc-text {
+    font-family: 'Golos Text', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--mid-gray);
+  }
   .hero__body {
     max-width: 473px;
-    font-family: 'Golos Text', sans-serif;
-    font-size: 18px;
-    line-height: 1.8;
-    color: var(--mid-gray);
     margin-top: 40px;
+  }
+  .hero__cta {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 22px 56px 20px;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Gros Ventre', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .hero__cta:hover {
+    background: var(--pure-white);
+  }
+
+  /* ─── STICKY CTA ─── */
+  .sticky-cta {
+    position: fixed;
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, background 0.3s, color 0.3s;
+    text-decoration: none;
+    font-family: 'Gros Ventre', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--yellow);
+    color: var(--black);
+    padding: 22px 56px 20px;
+    font-size: 18px;
+  }
+  .sticky-cta.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .sticky-cta.inverted {
+    background: var(--black);
+    color: var(--yellow);
+  }
+  .sticky-cta--desktop {
+    bottom: 32px;
+    right: 32px;
+  }
+  .sticky-cta--mobile {
+    display: none;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+    padding: 22px 20px 20px;
   }
 
   /* ─── DIVIDER ─── */
@@ -230,7 +288,7 @@
   .hooks {
     max-width: 900px;
     margin: 0 auto;
-    padding: 60px 24px 0;
+    padding: 60px 0 0;
   }
   .hook {
     display: flex;
@@ -269,9 +327,6 @@
     text-transform: uppercase;
   }
   .hook__sub {
-    font-family: 'Golos Text', sans-serif;
-    font-size: 12px;
-    color: var(--gray);
     text-align: center;
   }
 
@@ -279,7 +334,7 @@
   .benefits {
     max-width: 900px;
     margin: 0 auto;
-    padding: 200px 24px 0;
+    padding: 200px 0 0;
     text-align: center;
   }
   .benefits__title {
@@ -325,10 +380,6 @@
     text-align: left;
   }
   .benefits__card-desc {
-    font-family: 'Golos Text', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--light-gray);
     text-align: left;
   }
 
@@ -339,7 +390,7 @@
     align-items: center;
     justify-content: center;
     min-height: 400px;
-    padding: 220px 24px;
+    padding: 220px 24px 120px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -374,10 +425,10 @@
   }
   .scene__title {
     font-family: 'Gros Ventre', sans-serif;
-    font-weight: 700;
-    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 400;
+    font-size: clamp(28px, 5vw, 40px);
     letter-spacing: -1px;
-    line-height: 1.15;
+    line-height: 1.1;
     color: var(--yellow);
   }
 
@@ -389,9 +440,9 @@
     overflow: visible;
   }
   .burning__visuals {
-    position: relative;
-    width: 100%;
-    padding-bottom: 59%; /* aspect ratio ~530/900 */
+    display: flex;
+    justify-content: center;
+    padding: 0 24px;
   }
   .burning__smoke {
     position: absolute;
@@ -404,13 +455,10 @@
     pointer-events: none;
   }
   .burning__pan {
-    position: absolute;
-    top: 0;
-    left: 6%;
-    width: 88%;
+    width: 100%;
+    max-width: 1215px;
     height: auto;
     object-fit: contain;
-    z-index: 1;
   }
   .burning__shine {
     position: absolute;
@@ -540,7 +588,7 @@
 
   .burning__text {
     text-align: center;
-    padding: 120px 24px 0;
+    padding: 60px 0 0;
     z-index: 3;
     position: relative;
   }
@@ -564,15 +612,11 @@
   }
   .burning__after {
     text-align: center;
-    padding: 20px 24px 150px;
+    padding: 20px 0 120px;
     position: relative;
     z-index: 3;
   }
   .burning__after-text {
-    font-family: 'Golos Text', sans-serif;
-    font-size: clamp(18px, 3vw, 33px);
-    line-height: 1.7;
-    color: var(--mid-gray);
   }
 
   /* ─── RESPONSE ─── */
@@ -649,10 +693,10 @@
   }
   .form-inner {
     width: 100%;
-    max-width: 620px;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     padding: 56px 0;
   }
   .form-inner__title {
@@ -665,17 +709,12 @@
     text-align: center;
   }
   .form-inner__sub {
-    font-family: 'Golos Text', sans-serif;
-    font-weight: 500;
-    font-size: clamp(13px, 2vw, 16px);
-    color: var(--pure-white);
-    opacity: 0.5;
     text-align: center;
     padding: 8px 0 40px;
   }
   .form-group {
     width: 100%;
-    max-width: 518px;
+    max-width: 100%;
     padding-bottom: 28px;
   }
   .form-group__label {
@@ -722,7 +761,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 20px 56px;
+    padding: 22px 56px 20px;
     background: var(--pure-white);
     color: var(--black);
     font-family: 'Gros Ventre', sans-serif;
@@ -737,10 +776,6 @@
   }
   .submit-btn:hover {
     background: var(--yellow);
-    transform: scale(1.03);
-  }
-  .submit-btn:active {
-    transform: scale(0.97);
   }
 
   /* ─── REVEAL ANIMATION ─── */
@@ -764,7 +799,7 @@
   @media (max-width: 768px) {
     .hero {
       height: auto;
-      min-height: var(--vh-fix);
+      min-height: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -803,14 +838,18 @@
     }
 
     .hooks {
-      padding: 100px 20px 0;
+      padding: 60px 20px 60px;
     }
     .hook {
       padding: 20px 0;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .benefits {
-      padding: 100px 20px 0;
+      padding: 60px 20px 60px;
     }
     .benefits__row {
       flex-direction: column;
@@ -818,35 +857,29 @@
 
     .scene {
       min-height: 250px;
-      padding: 120px 20px;
+      padding: 60px 20px;
     }
 
     .burning__visuals {
-      padding-bottom: 70%;
-    }
-    .burning__smoke {
-      top: -30%;
-      left: -15%;
-      width: 130%;
+      padding: 0 20px;
     }
     .burning__pan {
-      left: 2%;
-      width: 96%;
+      max-width: 100%;
     }
     .burning__text {
-      padding: 40px 16px 0;
+      padding: 60px 20px 0;
     }
     .burning__after {
-      padding: 16px 16px 120px;
+      padding: 20px 20px 60px;
     }
 
     .response {
       min-height: 300px;
-      padding: 120px 20px;
+      padding: 60px 20px;
     }
 
     .cta {
-      padding: 120px 20px;
+      padding: 20px 20px;
     }
     .cta__images {
       gap: 0;
@@ -855,24 +888,37 @@
     }
 
     .form-section {
-      padding: 0 20px 40px;
+      padding: 60px 20px;
       min-height: var(--vh-fix);
     }
     .form-inner {
-      padding: 40px 0;
+      padding: 0;
+      max-width: 100%;
     }
     .form-group {
       max-width: 100%;
     }
+    .yo-eye { display: none; }
+    .hero__cta {
+      display: block;
+      text-align: center;
+    }
+    .sticky-cta--desktop { display: none; }
+    .sticky-cta--mobile { display: block; }
   }
 
   /* Prevent horizontal overflow on mobile */
   html {
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 </style>
 </head>
 <body>
+
+<!-- ═══ STICKY CTA ═══ -->
+<a href="#formSection" class="sticky-cta sticky-cta--desktop">Откликнуться</a>
+<a href="#formSection" class="sticky-cta sticky-cta--mobile">Откликнуться</a>
 
 <!-- ═══ MARQUEE TOP ═══ -->
 <div class="marquee marquee--top">
@@ -890,7 +936,8 @@
       <span class="reveal-line"><span class="hero__title-line hero__title-line--dim">КАЧ ИЩЕТ</span></span>
       <span class="reveal-line" style="transition-delay:0.15s"><span class="hero__title-line hero__title-line--bright">СТАЖ<span class="yo-letter">Е<span class="yo-eye yo-eye--left"><span class="yo-pupil"></span></span><span class="yo-eye yo-eye--right"><span class="yo-pupil"></span></span></span>РА</span></span>
     </h1>
-    <p class="hero__body">AI-native визуал. Реальные проекты. Оплачиваемая стажировка с&nbsp;выходом в&nbsp;штат.</p>
+    <p class="desc-text hero__body">Приглашаем в&nbsp;AI-native команду. Реальные проекты, реальная зарплата и&nbsp;арт-директор, который не&nbsp;даст расслабиться.</p>
+    <a href="#formSection" class="hero__cta">Откликнуться</a>
   </div>
 </section>
 
@@ -901,21 +948,21 @@
       <span class="reveal-line"><span class="hook__line1">Мы не учим писать промты.</span></span>
       <span class="reveal-line" style="transition-delay:0.12s"><span class="hook__line2">Мы учим <span>думать.</span></span></span>
     </div>
-    <p class="hook__sub">инструмент — данность. мышление —&nbsp;редкость.</p>
+    <p class="desc-text hook__sub">инструмент — данность. мышление —&nbsp;редкость.</p>
   </div>
   <div class="hook">
     <div class="hook__title" data-reveal>
       <span class="reveal-line"><span class="hook__line1">У&nbsp;нас не&nbsp;будет учебных задач.</span></span>
       <span class="reveal-line" style="transition-delay:0.12s"><span class="hook__line2">Только <span>настоящие</span> брифы.</span></span>
     </div>
-    <p class="hook__sub">клиенты, которых вы&nbsp;знаете. с&nbsp;настоящими бюджетами.</p>
+    <p class="desc-text hook__sub">клиенты, которых вы&nbsp;знаете. с&nbsp;настоящими бюджетами.</p>
   </div>
   <div class="hook">
     <div class="hook__title" data-reveal>
       <span class="reveal-line"><span class="hook__line1">Стажёрам здесь платят.</span></span>
       <span class="reveal-line" style="transition-delay:0.12s"><span class="hook__line2">Не&nbsp;только опытом, а&nbsp;<span>деньгами.</span></span></span>
     </div>
-    <p class="hook__sub">опыт —&nbsp;бонусом. но&nbsp;деньги —&nbsp;сразу.</p>
+    <p class="desc-text hook__sub">опыт —&nbsp;бонусом. но&nbsp;деньги —&nbsp;сразу.</p>
   </div>
 </section>
 
@@ -926,21 +973,21 @@
     <div class="benefits__row">
       <div class="benefits__card">
         <h3 class="benefits__card-title">Кредиты</h3>
-        <p class="benefits__card-desc">Midjourney, Runway, Sora, ComfyUI —&nbsp;и&nbsp;всё, что появится завтра. Лимит щедрый. Если сожжёшь —&nbsp;обсудим и&nbsp;дадим ещё.</p>
+        <p class="desc-text benefits__card-desc">Midjourney, Runway, Sora, ComfyUI —&nbsp;и&nbsp;всё, что появится завтра. Лимит щедрый. Если сожжёшь —&nbsp;обсудим и&nbsp;дадим ещё.</p>
       </div>
       <div class="benefits__card">
         <h3 class="benefits__card-title">Проекты</h3>
-        <p class="benefits__card-desc">Реальные клиенты, реальные брифы, реальные дедлайны.</p>
+        <p class="desc-text benefits__card-desc">Реальные клиенты, реальные брифы, реальные дедлайны.</p>
       </div>
     </div>
     <div class="benefits__row">
       <div class="benefits__card">
         <h3 class="benefits__card-title">Обучение</h3>
-        <p class="benefits__card-desc">Арт-директор рядом. Фидбек на&nbsp;каждую итерацию. «Переделай» —&nbsp;это не&nbsp;наказание, это метод.</p>
+        <p class="desc-text benefits__card-desc">Арт-директор рядом. Фидбек на&nbsp;каждую итерацию. «Переделай» —&nbsp;это не&nbsp;наказание, это метод.</p>
       </div>
       <div class="benefits__card">
         <h3 class="benefits__card-title">Зарплата</h3>
-        <p class="benefits__card-desc">Оплачиваемая стажировка с&nbsp;первого дня. Не&nbsp;стипендия, не&nbsp;«за&nbsp;опыт» —&nbsp;реальные деньги за&nbsp;реальную работу.</p>
+        <p class="desc-text benefits__card-desc">Оплачиваемая стажировка с&nbsp;первого дня. Не&nbsp;стипендия, не&nbsp;«за&nbsp;опыт» —&nbsp;реальные деньги за&nbsp;реальную работу.</p>
       </div>
     </div>
     <div class="benefits__row">
@@ -971,47 +1018,27 @@
 <!-- ═══ BURNING ═══ -->
 <section class="burning">
   <div class="burning__visuals">
-    <img src="img/pan.png" alt="" class="burning__pan">
-    <img src="img/shine.png" alt="" class="burning__shine">
-    <!-- символы (белые, тихие) -->
-    <span class="bounce-letter" style="--x:30%;--y:44%;--jump:-170px;--delay:0.3s;--dur:3.1s">%</span>
-    <span class="bounce-letter" style="--x:62%;--y:40%;--jump:-150px;--delay:1.8s;--dur:3.5s">@</span>
-    <span class="bounce-letter" style="--x:25%;--y:56%;--jump:-140px;--delay:2.5s;--dur:3.8s">^</span>
-    <span class="bounce-letter" style="--x:58%;--y:57%;--jump:-160px;--delay:0.7s;--dur:3.3s">&amp;</span>
-    <span class="bounce-letter" style="--x:68%;--y:52%;--jump:-130px;--delay:1.2s;--dur:3.6s">*</span>
-    <span class="bounce-letter" style="--x:40%;--y:60%;--jump:-145px;--delay:2.1s;--dur:3.4s">-</span>
-    <!-- КАЧ (зелёные, последовательно) -->
-    <span class="bounce-letter bounce-letter--word" style="--x:32%;--y:50%;--jump:-240px" data-spell="0">К</span>
-    <span class="bounce-letter bounce-letter--word" style="--x:42%;--y:48%;--jump:-220px" data-spell="1">А</span>
-    <span class="bounce-letter bounce-letter--word" style="--x:52%;--y:46%;--jump:-260px" data-spell="2">Ч</span>
-    <!-- СТАЖЁР (зелёные, последовательно после КАЧ) -->
-    <span class="bounce-letter bounce-letter--word" style="--x:28%;--y:54%;--jump:-210px" data-spell="3">С</span>
-    <span class="bounce-letter bounce-letter--word" style="--x:36%;--y:52%;--jump:-230px" data-spell="4">Т</span>
-    <span class="bounce-letter bounce-letter--word" style="--x:44%;--y:56%;--jump:-200px" data-spell="5">А</span>
-    <span class="bounce-letter bounce-letter--word" style="--x:52%;--y:54%;--jump:-250px" data-spell="6">Ж</span>
-    <span class="bounce-letter bounce-letter--word" style="--x:60%;--y:50%;--jump:-220px" data-spell="7">Ё</span>
-    <span class="bounce-letter bounce-letter--word" style="--x:67%;--y:52%;--jump:-240px" data-spell="8">Р</span>
+    <img src="img/toasterr.png" alt="" class="burning__pan">
   </div>
   <div class="burning__text" data-reveal>
     <span class="reveal-line"><span class="burning__line1">ЭТО СТАЖЁР</span></span>
     <span class="reveal-line" style="transition-delay:0.15s"><span class="burning__line2">сжигает ТОКЕНЫ.</span></span>
   </div>
   <div class="burning__after">
-    <p class="burning__after-text">За ночь сжёг недельный лимит на&nbsp;генерацию и&nbsp;мы&nbsp;его&nbsp;похвалили.</p>
+    <p class="desc-text burning__after-text">За ночь сжёг недельный лимит на&nbsp;генерацию и&nbsp;мы&nbsp;его&nbsp;похвалили, ведь шедевры дороже любых токенов.</p>
   </div>
 </section>
 
 <!-- ═══ RESPONSE ═══ -->
 <section class="response">
-  <h2 class="response__text" data-reveal><span class="reveal-line"><span>ведь шедевры</span></span><span class="reveal-line" style="transition-delay:0.15s"><span>дороже любых</span></span><span class="reveal-line" style="transition-delay:0.3s"><span>токенов</span></span></h2>
+  <h2 class="response__text" data-reveal><span class="reveal-line"><span>ГОТОВ</span></span><span class="reveal-line" style="transition-delay:0.15s"><span>ЗАЖИГАТЬ</span></span><span class="reveal-line" style="transition-delay:0.3s"><span>С НАМИ?</span></span></h2>
 </section>
 
 <!-- ═══ CTA ═══ -->
 <section class="cta">
-  <h2 class="cta__title" data-reveal><span class="reveal-line"><span>ГОТОВ</span></span><span class="reveal-line" style="transition-delay:0.1s"><span>ЗАЖИГАТЬ</span></span><span class="reveal-line" style="transition-delay:0.2s"><span>С НАМИ?</span></span></h2>
   <div class="cta__images">
     <img src="img/спички.png" alt="" class="cta__box">
-    <img src="img/match.png" alt="" class="cta__match">
+    <a href="#formSection"><img src="img/match.png" alt="" class="cta__match"></a>
   </div>
 </section>
 
@@ -1019,7 +1046,7 @@
 <section class="form-section" id="formSection">
   <div class="form-inner">
     <h2 class="form-inner__title">Заполняй заявку</h2>
-    <p class="form-inner__sub">Покажи, что у&nbsp;тебя есть огонь.<br>А&nbsp;токены мы&nbsp;дадим ;)</p>
+    <p class="desc-text form-inner__sub">Покажи, что у&nbsp;тебя есть огонь. А&nbsp;токены мы&nbsp;дадим&nbsp;;)<br>Заполни форму — напишем тебе в&nbsp;Telegram в&nbsp;течение 3&nbsp;дней.</p>
     <form id="applicationForm">
       <div class="form-group">
         <label class="form-group__label">Имя</label>
@@ -1040,13 +1067,6 @@
   </div>
 </section>
 
-<!-- ═══ MARQUEE BOTTOM ═══ -->
-<div class="marquee marquee--bottom">
-  <div class="marquee__track">
-    <span class="marquee__text">«ОН СЖЁГ НЕДЕЛЬНЫЙ ЛИМИТ ЗА НОЧЬ» — «И КАК?» — «ШЕДЕВР НА СЕДЬМОЙ ГЕНЕРАЦИИ» • ОШИБКИ НА СТАЖИРОВКЕ ДЕШЕВЛЕ ОШИБОК НА ПРОДАКШЕНЕ • «ПЕРЕДЕЛАЙ» — ЭТО НЕ НАКАЗАНИЕ, ЭТО МЕТОД • ТОКЕНЫ КОНЧАЮТСЯ, ВКУС — НЕТ •</span>
-    <span class="marquee__text">«ОН СЖЁГ НЕДЕЛЬНЫЙ ЛИМИТ ЗА НОЧЬ» — «И КАК?» — «ШЕДЕВР НА СЕДЬМОЙ ГЕНЕРАЦИИ» • ОШИБКИ НА СТАЖИРОВКЕ ДЕШЕВЛЕ ОШИБОК НА ПРОДАКШЕНЕ • «ПЕРЕДЕЛАЙ» — ЭТО НЕ НАКАЗАНИЕ, ЭТО МЕТОД • ТОКЕНЫ КОНЧАЮТСЯ, ВКУС — НЕТ •</span>
-  </div>
-</div>
 
 <script>
 // Marquee sticky → stuck at CTA bottom
@@ -1148,6 +1168,41 @@ document.querySelectorAll('[data-reveal]').forEach(el => obsReveal.observe(el));
       const dist = Math.min(Math.sqrt(dx * dx + dy * dy) * 0.05, maxMove);
       pupil.style.transform = 'translate(' + (Math.cos(angle) * dist) + 'px, ' + (Math.sin(angle) * dist) + 'px)';
     });
+  });
+})();
+
+/* Sticky CTA — появляется после hero, исчезает когда форма видна */
+(function() {
+  var stickies = document.querySelectorAll('.sticky-cta');
+  var hero = document.querySelector('.hero');
+  var formSection = document.querySelector('#formSection');
+  var yellowSections = document.querySelectorAll('.response, .cta');
+  window.addEventListener('scroll', function() {
+    var heroBottom = hero.getBoundingClientRect().bottom;
+    var formTop = formSection.getBoundingClientRect().top;
+    var show = heroBottom < 0 && formTop > window.innerHeight;
+    // Проверяем, кнопка над жёлтым фоном?
+    var onYellow = false;
+    yellowSections.forEach(function(sec) {
+      var r = sec.getBoundingClientRect();
+      if (r.top < window.innerHeight - 20 && r.bottom > window.innerHeight - 80) {
+        onYellow = true;
+      }
+    });
+    stickies.forEach(function(s) {
+      s.classList.toggle('visible', show);
+      s.classList.toggle('inverted', onYellow);
+    });
+  });
+})();
+
+/* Success state при отправке формы */
+(function() {
+  var form = document.getElementById('applicationForm');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var inner = document.querySelector('.form-inner');
+    inner.innerHTML = '<h2 class="form-inner__title">Заявка отправлена!</h2><p class="desc-text form-inner__sub">Напишем тебе в Telegram в течение 3 дней.</p>';
   });
 })();
 </script>
