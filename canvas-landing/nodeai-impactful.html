@@ -447,29 +447,50 @@ nav {
 .hiw-steps.animated .step-card:nth-child(2) { animation: stepPulse 2s 2.4s both; }
 .hiw-steps.animated .step-card:nth-child(3) { animation: stepPulse 2s 4.8s both; }
 
-/* ── STEP 1: cursor + list ── */
+/* ── STEP 1: cursor hovers items → clicks item 3 ── */
 @keyframes s1CursorMove {
-  0%,5%   { transform: translate(152px, 12px); }
-  55%     { transform: translate(152px, 52px); }
-  65%     { transform: translate(150px, 50px); }
-  100%    { transform: translate(152px, 52px); }
+  0%      { transform: translate(165px, 4px); }
+  14%     { transform: translate(126px, 14px); }  /* hover item 1 */
+  32%     { transform: translate(126px, 14px); }
+  44%     { transform: translate(113px, 34px); }  /* hover item 2 */
+  58%     { transform: translate(113px, 34px); }
+  68%     { transform: translate(119px, 52px); }  /* hover item 3 */
+  78%     { transform: translate(119px, 52px); }
+  84%     { transform: translate(120px, 55px); }  /* press */
+  100%    { transform: translate(119px, 52px); }
 }
-@keyframes s1ItemSelect {
-  0%,50%  { fill: var(--border); }
-  68%,100%{ fill: #C8E62E; }
+@keyframes s1Li1 {
+  0%,11%  { fill: var(--border); }
+  18%     { fill: #c8c6c0; }
+  36%     { fill: var(--border); }
+  100%    { fill: var(--border); }
+}
+@keyframes s1Li2 {
+  0%,42%  { fill: var(--border); }
+  50%     { fill: #c8c6c0; }
+  62%     { fill: var(--border); }
+  100%    { fill: var(--border); }
+}
+@keyframes s1Li3 {
+  0%,66%  { fill: var(--border); }
+  73%     { fill: #c8c6c0; }
+  82%     { fill: rgba(160,196,20,0.65); }
+  89%,100%{ fill: #C8E62E; }
 }
 @keyframes s1DotSelect {
-  0%,50%  { fill: var(--text-muted); }
-  68%,100%{ fill: #111112; }
+  0%,84%  { opacity: 0; }
+  91%,100%{ opacity: 1; }
 }
 @keyframes s1Ripple {
-  0%,58%  { transform: scale(0); opacity: 1; }
-  90%     { transform: scale(1); opacity: 0; }
-  100%    { transform: scale(1); opacity: 0; }
+  0%,81%  { transform: scale(0); opacity: 0.8; }
+  97%     { transform: scale(1.6); opacity: 0; }
+  100%    { opacity: 0; }
 }
 .hiw-steps.animated .s1-cursor { animation: s1CursorMove 2s 0s cubic-bezier(.4,0,.2,1) both; }
-.hiw-steps.animated .s1-li3    { animation: s1ItemSelect 2s 0s both; }
-.hiw-steps.animated .s1-dot3   { animation: s1DotSelect  2s 0s both; }
+.hiw-steps.animated .s1-li1    { animation: s1Li1 2s 0s both; }
+.hiw-steps.animated .s1-li2    { animation: s1Li2 2s 0s both; }
+.hiw-steps.animated .s1-li3    { animation: s1Li3 2s 0s both; }
+.hiw-steps.animated .s1-dot3   { animation: s1DotSelect 2s 0s both; }
 .hiw-steps.animated .s1-ripple { transform-origin: 78px 57px; animation: s1Ripple 2s 0s both; }
 
 /* ── STEP 2: drag & drop ── */
@@ -1302,8 +1323,8 @@ footer {
       <div class="step-svg-wrap">
         <svg class="step-svg" viewBox="0 0 200 100">
           <!-- list items -->
-          <rect x="28" y="10" width="110" height="14" rx="4" fill="var(--border)"/>
-          <rect x="28" y="30" width="90" height="14" rx="4" fill="var(--border)"/>
+          <rect x="28" y="10" width="110" height="14" rx="4" class="s1-li1" fill="var(--border)"/>
+          <rect x="28" y="30" width="90" height="14" rx="4" class="s1-li2" fill="var(--border)"/>
           <rect x="28" y="50" width="100" height="14" rx="4" class="s1-li3" fill="var(--border)"/>
           <!-- dot on 3rd item -->
           <circle cx="18" cy="57" r="4" class="s1-dot3" fill="var(--text-muted)"/>
@@ -1530,14 +1551,13 @@ footer {
     <h2 class="final-title">Ваша первая картинка&nbsp;— за наш счёт.</h2>
     <p class="final-sub">Без регистрации. Без карты. Просто попробуйте.</p>
     <button class="btn-cta">Сгенерировать сейчас</button>
-    <div class="final-note">nodeai.canvas · clinical aesthetic · 2024</div>
   </div>
 </section>
 
 <!-- ════════════ FOOTER ════════════ -->
 <footer style="position:relative;">
   <span class="footer-logo">КАЧ Канвас</span>
-  <span class="footer-copy">© 2024 КАЧ Канвас. The Clinical Aesthetic.</span>
+  <span class="footer-copy">© 2024 КАЧ Канвас</span>
   <div class="footer-links">
     <a href="#">Privacy Policy</a>
     <a href="#">Terms of Service</a>
