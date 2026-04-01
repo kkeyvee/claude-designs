@@ -467,22 +467,22 @@ nav {
 }
 /* item hover: white flash while cursor is over, fades back to neutral */
 @keyframes s1Li1 {
-  0%,12%  { fill: rgba(255,255,255,0.7); }
-  18%,30% { fill: rgba(255,255,255,0.98); }
-  36%     { fill: rgba(255,255,255,0.7); }
-  100%    { fill: rgba(255,255,255,0.7); }
+  0%,12%  { fill: rgba(255,255,255,0.38); }
+  18%,30% { fill: rgba(255,255,255,0.68); }
+  36%     { fill: rgba(255,255,255,0.38); }
+  100%    { fill: rgba(255,255,255,0.38); }
 }
 @keyframes s1Li2 {
-  0%,44%  { fill: rgba(255,255,255,0.7); }
-  50%,58% { fill: rgba(255,255,255,0.98); }
-  64%     { fill: rgba(255,255,255,0.7); }
-  100%    { fill: rgba(255,255,255,0.7); }
+  0%,44%  { fill: rgba(255,255,255,0.38); }
+  50%,58% { fill: rgba(255,255,255,0.68); }
+  64%     { fill: rgba(255,255,255,0.38); }
+  100%    { fill: rgba(255,255,255,0.38); }
 }
 /* item 3: hover → click flash → stays green (selected) */
 @keyframes s1Li3 {
-  0%,68%  { fill: rgba(255,255,255,0.7); }
-  74%,80% { fill: rgba(255,255,255,0.98); }
-  84%     { fill: rgba(255,255,255,1); }
+  0%,68%  { fill: rgba(255,255,255,0.38); }
+  74%,80% { fill: rgba(255,255,255,0.68); }
+  84%     { fill: rgba(255,255,255,0.82); }
   90%,100%{ fill: #C8E62E; }
 }
 @keyframes s1DotSelect {
@@ -1365,10 +1365,10 @@ footer {
             <rect x="8" y="24" width="62" height="116" fill="rgba(17,17,18,0.05)"/>
             <line x1="70" y1="24" x2="70" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
             <!-- Sidebar list items — white, animated hover -->
-            <rect x="13" y="30" width="50" height="9" rx="4" class="s1-li1" fill="rgba(255,255,255,0.7)"/>
-            <rect x="13" y="45" width="50" height="9" rx="4" class="s1-li2" fill="rgba(255,255,255,0.7)"/>
-            <rect x="13" y="60" width="50" height="9" rx="4" class="s1-li3" fill="rgba(255,255,255,0.7)"/>
-            <rect x="13" y="75" width="50" height="9" rx="4" fill="rgba(255,255,255,0.7)"/>
+            <rect x="13" y="30" width="50" height="9" rx="4" class="s1-li1" fill="rgba(255,255,255,0.38)"/>
+            <rect x="13" y="45" width="50" height="9" rx="4" class="s1-li2" fill="rgba(255,255,255,0.38)"/>
+            <rect x="13" y="60" width="50" height="9" rx="4" class="s1-li3" fill="rgba(255,255,255,0.38)"/>
+            <rect x="13" y="75" width="50" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
             <!-- Selection dot — appears beside item 3 after click -->
             <circle cx="11" cy="64.5" r="2" class="s1-dot3" fill="var(--accent)" style="opacity:0;"/>
             <!-- Content area: single neutral block -->
@@ -1420,14 +1420,13 @@ footer {
             <!-- Thumbnail — scales from drop zone centre to fill it entirely -->
             <g class="s2-thumb" style="transform:scale(0);">
               <rect x="74" y="28" width="110" height="70" rx="8" fill="var(--accent)"/>
-              <rect x="86" y="40" width="62" height="38" rx="4" fill="rgba(255,255,255,0.22)"/>
             </g>
             <!-- Cursor (drags thumb up) -->
             <g class="s2-cursor" style="transform:translate(127px,118px); opacity:0;">
               <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
             </g>
-            <!-- Checkmark (dark, visible on green) -->
-            <polyline points="115,63 127,75 145,47" fill="none" stroke="rgba(17,17,18,0.75)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
+            <!-- Checkmark (smaller, subtle) -->
+            <polyline points="121,60 128,67 139,52" fill="none" stroke="rgba(17,17,18,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:36;stroke-dashoffset:36;"/>
           </g>
           <rect x="8" y="8" width="184" height="140" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
         </svg>
