@@ -1156,6 +1156,17 @@ footer {
   margin-top: 16px;
 }
 
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Teaser card — desktop hidden */
 .sol-teaser { display: none; }
 
@@ -1312,9 +1323,9 @@ footer {
   }
   .footer-links { justify-content: center; }
 
-  /* Solution card images — less tall */
-  .sol-card-img { height: 160px; }
-  .sol-soon .sol-card-img { height: 160px; }
+  /* Solution card images */
+  .sol-card-img { height: 240px; }
+  .sol-soon .sol-card-img { height: 240px; }
   .sol-product-photos { grid-template-columns: repeat(3, 1fr); }
   .sol-product-photos img { aspect-ratio: 4/3; border-radius: 12px; }
 
@@ -1919,6 +1930,41 @@ footer {
   }
   applyScale();
   window.addEventListener('resize', applyScale);
+
+  // Scroll reveal
+  const revealTargets = [
+    'h1, h2, h3',
+    '.hero-desc',
+    '.hiw-desc',
+    '.stat-card',
+    '.step-body',
+    '.sol-card-body',
+    '.plan-card',
+    '.final-cta-title',
+    '.final-sub',
+    '.eq-text',
+    '.gallery > div:first-child'
+  ].join(', ');
+
+  const revealEls = document.querySelectorAll(revealTargets);
+  revealEls.forEach((el, i) => {
+    el.classList.add('reveal');
+    // stagger siblings inside the same parent
+    const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal'));
+    const idx = siblings.indexOf(el);
+    if (idx > 0) el.style.transitionDelay = `${idx * 0.08}s`;
+  });
+
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => revealObs.observe(el));
 </script>
 </body>
 </html>
