@@ -1216,6 +1216,15 @@ footer {
   }
   .sol-product-photos { grid-template-columns: repeat(3, 1fr); padding: 12px 12px 0; }
   .sol-product-photos img { aspect-ratio: 4/3; border-radius: 10px; }
+
+  /* span2 + product: description under title, image fills space */
+  .sol-span2 .sol-card-body,
+  .sol-product .sol-card-body { grid-template-columns: 1fr; }
+  .sol-span2 .sol-desc,
+  .sol-product .sol-desc { max-width: 100%; }
+  .sol-span2 .sol-card-img { flex: 1; height: auto; min-height: 120px; }
+  .sol-product-photos { flex: 1; }
+
   .sol-teaser {
     display: flex;
     flex: 0 0 56vw;
@@ -1274,7 +1283,7 @@ footer {
   .gallery-card {
     flex: 0 0 72vw;
     scroll-snap-align: start;
-    height: 200px;
+    height: 400px;
     border-radius: 16px;
   }
 
