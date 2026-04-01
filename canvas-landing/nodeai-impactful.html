@@ -528,32 +528,33 @@ nav {
 .hiw-steps.animated .s2-zone   { animation: s2Zone  2s 2.4s both; }
 .hiw-steps.animated .s2-check  { animation: s2Check 2s 2.4s both; }
 
-/* ── STEP 3: download ── */
-@keyframes s3Arrow {
-  0%,10%  { transform: translateY(0); opacity:1; }
-  35%     { transform: translateY(9px); opacity:1; }
-  50%     { transform: translateY(5px); }
-  65%     { transform: translateY(9px); }
-  80%     { transform: translateY(18px); opacity:0; }
-  100%    { transform: translateY(18px); opacity:0; }
+/* ── STEP 3: cursor clicks button → card flies to top-right → checkmark ── */
+@keyframes s3CursorClick {
+  0%      { transform: translate(168px, 84px); }
+  28%     { transform: translate(91px, 66px); }
+  40%     { transform: translate(91px, 70px); }
+  52%,100%{ transform: translate(91px, 66px); }
 }
-@keyframes s3Bar {
-  0%,30%  { width: 0px; }
-  85%,100%{ width: 104px; }
+@keyframes s3BtnClick {
+  0%,36%  { transform: scale(1); }
+  44%     { transform: scale(0.94); }
+  55%     { transform: scale(1.03); }
+  62%,100%{ transform: scale(1); }
+}
+@keyframes s3CardFly {
+  0%,42%  { transform: scale(0); opacity:0; }
+  47%     { transform: scale(0.35); opacity:1; }
+  72%,100%{ transform: scale(1); opacity:1; }
 }
 @keyframes s3Check {
-  0%,78%  { stroke-dashoffset: 50; opacity:0; }
-  84%     { opacity:1; }
+  0%,70%  { stroke-dashoffset: 50; opacity:0; }
+  76%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
-@keyframes s3Img {
-  0%,60%  { fill: rgba(200,230,46,0.25); }
-  80%,100%{ fill: #C8E62E; }
-}
-.hiw-steps.animated .s3-arrow { animation: s3Arrow 2s 4.8s both; }
-.hiw-steps.animated .s3-bar   { animation: s3Bar   2s 4.8s both; }
-.hiw-steps.animated .s3-check { animation: s3Check 2s 4.8s both; }
-.hiw-steps.animated .s3-img   { animation: s3Img   2s 4.8s both; }
+.hiw-steps.animated .s3-cursor { animation: s3CursorClick 2s 4.8s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s3-btn    { animation: s3BtnClick    2s 4.8s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s3-card   { animation: s3CardFly     2s 4.8s cubic-bezier(.16,1,.3,1) both; }
+.hiw-steps.animated .s3-check  { animation: s3Check       2s 4.8s both; }
 .step-num {
   font-family: var(--mono);
   font-size: 13px;
@@ -1385,19 +1386,21 @@ footer {
       <div class="step-num">03</div>
       <div class="step-svg-wrap">
         <svg class="step-svg" viewBox="0 0 200 100">
-          <!-- image preview -->
-          <rect x="20" y="10" width="72" height="72" rx="10" class="s3-img" fill="rgba(200,230,46,0.25)"/>
-          <rect x="30" y="20" width="52" height="36" rx="5" fill="rgba(200,230,46,0.4)"/>
-          <!-- download arrow -->
-          <g class="s3-arrow">
-            <line x1="145" y1="22" x2="145" y2="50" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
-            <polyline points="136,43 145,54 154,43" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- button -->
+          <g class="s3-btn" style="transform-origin:100px 74px;">
+            <rect x="50" y="60" width="100" height="28" rx="14" fill="var(--accent)"/>
+            <rect x="68" y="70" width="64" height="8" rx="4" fill="rgba(17,17,18,0.25)"/>
           </g>
-          <!-- progress bar -->
-          <rect x="108" y="68" width="72" height="6" rx="3" fill="var(--border)"/>
-          <rect x="108" y="68" width="0" height="6" rx="3" fill="var(--accent)" class="s3-bar"/>
-          <!-- check -->
-          <polyline points="120,47 131,58 152,36" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s3-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
+          <!-- result card — scales out from button center to top-right -->
+          <g class="s3-card" style="transform:scale(0);transform-origin:100px 74px;opacity:0;">
+            <rect x="132" y="4" width="60" height="52" rx="9" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.2"/>
+            <rect x="140" y="12" width="44" height="28" rx="5" fill="rgba(200,230,46,0.4)"/>
+            <polyline points="143,47 150,54 163,38" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s3-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
+          </g>
+          <!-- cursor -->
+          <g class="s3-cursor" style="transform:translate(168px,84px);">
+            <path d="M2,2 L2,24 L7,19 L11,27 L15,25 L11,17 L18,17 Z" fill="#111112" stroke="white" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          </g>
         </svg>
       </div>
       <div class="step-body">
