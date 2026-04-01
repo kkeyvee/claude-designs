@@ -433,7 +433,7 @@ nav {
   min-height: 380px;
   transition: background 0.6s;
 }
-/* SVG illustration area — top, edge-to-edge */
+/* SVG illustration area — top, inset rounded box */
 .step-svg-wrap {
   height: 200px;
   flex-shrink: 0;
@@ -441,10 +441,40 @@ nav {
   border-radius: 16px;
   margin: 8px 8px 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
 }
-.step-svg { width: 100%; height: 100%; overflow: visible; }
+/* Browser chrome skeleton */
+.browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  height: 26px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(17,17,18,0.08);
+  background: rgba(17,17,18,0.04);
+}
+.browser-dots {
+  display: flex;
+  gap: 5px;
+}
+.browser-dots span {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.browser-bar {
+  flex: 1;
+  height: 12px;
+  background: rgba(17,17,18,0.07);
+  border-radius: 6px;
+  max-width: 96px;
+  margin: 0 auto;
+}
+.step-svg { width: 100%; flex: 1; overflow: visible; }
 
 /* Card highlight pulse */
 @keyframes stepPulse {
@@ -651,8 +681,10 @@ nav {
   align-items: start;
   gap: 24px;
 }
-.sol-span2 .sol-title {
+.sol-span2 .sol-title,
+.sol-product .sol-title {
   max-width: 100%;
+  line-height: 1.05;
 }
 .sol-span2 .sol-desc {
   max-width: calc(100vw / 3 - var(--gutter) * 2);
@@ -860,24 +892,23 @@ nav {
   padding: 120px var(--gutter) 0;
 }
 .gallery-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  transition: grid-template-columns 0.7s cubic-bezier(0.16,1,0.3,1);
 }
-/* Column expand on hover — cards are nth-child of their .gallery-row (display:contents) */
-.gallery-grid:has(.gallery-card:nth-child(1):hover) { grid-template-columns: 1.55fr 1fr 1fr; }
-.gallery-grid:has(.gallery-card:nth-child(2):hover) { grid-template-columns: 1fr 1.55fr 1fr; }
-.gallery-grid:has(.gallery-card:nth-child(3):hover) { grid-template-columns: 1fr 1fr 1.55fr; }
 .gallery-row {
-  display: contents;
+  display: flex;
+  gap: 16px;
 }
 .gallery-card {
+  flex: 1;
   aspect-ratio: 4/3;
   border-radius: 20px;
   overflow: hidden;
   background: var(--bg-card);
+  transition: flex 0.7s cubic-bezier(0.16,1,0.3,1);
 }
+.gallery-card:hover { flex: 1.55; }
 .gallery-card img {
   width: 100%;
   height: 100%;
@@ -1350,18 +1381,19 @@ footer {
   <div class="hiw-steps">
     <div class="step-card">
       <div class="step-svg-wrap">
+        <div class="browser-chrome"><div class="browser-dots"><span></span><span></span><span></span></div><div class="browser-bar"></div></div>
         <svg class="step-svg" viewBox="0 0 200 100">
           <!-- list items -->
-          <rect x="28" y="10" width="110" height="14" rx="4" class="s1-li1" fill="var(--border)"/>
-          <rect x="28" y="30" width="90" height="14" rx="4" class="s1-li2" fill="var(--border)"/>
-          <rect x="28" y="50" width="100" height="14" rx="4" class="s1-li3" fill="var(--border)"/>
+          <rect x="28" y="10" width="110" height="14" rx="5" class="s1-li1" fill="var(--border)"/>
+          <rect x="28" y="30" width="90" height="14" rx="5" class="s1-li2" fill="var(--border)"/>
+          <rect x="28" y="50" width="100" height="14" rx="5" class="s1-li3" fill="var(--border)"/>
           <!-- dot on 3rd item -->
           <circle cx="18" cy="57" r="4" class="s1-dot3" fill="var(--text-muted)"/>
           <!-- ripple on click -->
           <circle cx="78" cy="57" r="10" fill="none" stroke="var(--accent)" stroke-width="1.5" class="s1-ripple" style="transform-origin:78px 57px;"/>
           <!-- cursor -->
           <g class="s1-cursor" style="transform:translate(146px,8px)">
-            <path d="M2,2 L2,24 L7,19 L11,27 L15,25 L11,17 L18,17 Z" fill="#111112" stroke="white" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
         </svg>
       </div>
@@ -1373,17 +1405,18 @@ footer {
     </div>
     <div class="step-card">
       <div class="step-svg-wrap">
+        <div class="browser-chrome"><div class="browser-dots"><span></span><span></span><span></span></div><div class="browser-bar"></div></div>
         <svg class="step-svg" viewBox="0 0 200 100">
           <!-- drop zone (right) -->
-          <rect x="118" y="18" width="62" height="64" rx="10" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
+          <rect x="118" y="18" width="62" height="64" rx="8" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
           <!-- thumbnail group (both rects move together) -->
           <g class="s2-thumb">
             <rect x="20" y="23" width="56" height="56" rx="8" fill="rgba(200,230,46,0.35)"/>
-            <rect x="28" y="31" width="40" height="28" rx="4" fill="rgba(200,230,46,0.5)"/>
+            <rect x="28" y="31" width="40" height="28" rx="5" fill="rgba(200,230,46,0.5)"/>
           </g>
           <!-- cursor follows thumb -->
           <g class="s2-cursor" style="transform:translate(68px,28px); opacity:0;">
-            <path d="M2,2 L2,24 L7,19 L11,27 L15,25 L11,17 L18,17 Z" fill="#111112" stroke="white" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
           <!-- check in zone -->
           <polyline points="131,52 141,62 158,42" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
@@ -1397,6 +1430,7 @@ footer {
     </div>
     <div class="step-card">
       <div class="step-svg-wrap">
+        <div class="browser-chrome"><div class="browser-dots"><span></span><span></span><span></span></div><div class="browser-bar"></div></div>
         <svg class="step-svg" viewBox="0 0 200 100">
           <!-- button -->
           <g class="s3-btn" style="transform-origin:100px 74px;">
@@ -1405,13 +1439,13 @@ footer {
           </g>
           <!-- result card — scales out from button center to top-right -->
           <g class="s3-card" style="transform:scale(0);transform-origin:100px 74px;opacity:0;">
-            <rect x="132" y="4" width="60" height="52" rx="9" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.2"/>
+            <rect x="132" y="4" width="60" height="52" rx="8" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.2"/>
             <rect x="140" y="12" width="44" height="28" rx="5" fill="rgba(200,230,46,0.4)"/>
             <polyline points="143,47 150,54 163,38" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s3-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
           </g>
           <!-- cursor -->
           <g class="s3-cursor" style="transform:translate(168px,84px);">
-            <path d="M2,2 L2,24 L7,19 L11,27 L15,25 L11,17 L18,17 Z" fill="#111112" stroke="white" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
         </svg>
       </div>
