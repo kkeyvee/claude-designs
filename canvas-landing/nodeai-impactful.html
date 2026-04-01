@@ -899,10 +899,10 @@ nav {
 .gallery-row {
   display: flex;
   gap: 16px;
+  height: 260px;
 }
 .gallery-card {
   flex: 1;
-  aspect-ratio: 4/3;
   border-radius: 20px;
   overflow: hidden;
   background: var(--bg-card);
@@ -1181,7 +1181,8 @@ footer {
   .stats { grid-template-columns: 1fr; }
   .hiw-steps { grid-template-columns: 1fr; }
   .pricing-cards { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-row { height: 180px; }
+  .gallery-grid .gallery-row:last-child { display: none; }
   .final-cta { padding: 80px 32px; margin: 40px 20px 0; }
   .eq-text { font-size: clamp(36px, 9vw, 60px); }
 
