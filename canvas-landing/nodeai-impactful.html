@@ -456,35 +456,38 @@ nav {
 /* ── STEP 1: cursor hovers sidebar items → clicks item 3 ── */
 @keyframes s1CursorMove {
   0%      { transform: translate(170px, 96px); }
-  14%     { transform: translate(28px, 31px); }
-  32%     { transform: translate(28px, 31px); }
-  44%     { transform: translate(24px, 42px); }
-  58%     { transform: translate(24px, 42px); }
-  68%     { transform: translate(26px, 53px); }
-  78%     { transform: translate(26px, 53px); }
-  84%     { transform: translate(26px, 55px); }
-  100%    { transform: translate(26px, 53px); }
+  14%     { transform: translate(36px, 32.5px); }
+  32%     { transform: translate(36px, 32.5px); }
+  44%     { transform: translate(36px, 47.5px); }
+  58%     { transform: translate(36px, 47.5px); }
+  68%     { transform: translate(36px, 62.5px); }
+  78%     { transform: translate(36px, 62.5px); }
+  84%     { transform: translate(36px, 64.5px); }
+  100%    { transform: translate(36px, 62.5px); }
 }
-/* item 1: cursor hovers (light tint), then cursor leaves → back to normal */
+/* item hover: white flash while cursor is over, fades back to neutral */
 @keyframes s1Li1 {
-  0%,12%  { fill: var(--border); }
-  18%,32% { fill: rgba(17,17,18,0.14); }
-  38%     { fill: var(--border); }
-  100%    { fill: var(--border); }
+  0%,12%  { fill: rgba(255,255,255,0.7); }
+  18%,30% { fill: rgba(255,255,255,0.98); }
+  36%     { fill: rgba(255,255,255,0.7); }
+  100%    { fill: rgba(255,255,255,0.7); }
 }
-/* item 2: same hover pattern */
 @keyframes s1Li2 {
-  0%,44%  { fill: var(--border); }
-  50%,58% { fill: rgba(17,17,18,0.14); }
-  64%     { fill: var(--border); }
-  100%    { fill: var(--border); }
+  0%,44%  { fill: rgba(255,255,255,0.7); }
+  50%,58% { fill: rgba(255,255,255,0.98); }
+  64%     { fill: rgba(255,255,255,0.7); }
+  100%    { fill: rgba(255,255,255,0.7); }
 }
-/* item 3: hover → bright flash on click → stays accent (selected) */
 @keyframes s1Li3 {
-  0%,68%  { fill: var(--border); }
-  74%,80% { fill: rgba(17,17,18,0.14); }
-  84%     { fill: #fff; }
-  90%,100%{ fill: #C8E62E; }
+  0%,68%  { fill: rgba(255,255,255,0.7); }
+  74%,80% { fill: rgba(255,255,255,0.98); }
+  84%     { fill: rgba(255,255,255,1); }
+  90%,100%{ fill: rgba(255,255,255,0.7); }
+}
+/* selected bar appears after click */
+@keyframes s1Selected {
+  0%,82%  { opacity: 0; }
+  90%,100%{ opacity: 1; }
 }
 @keyframes s1DotSelect {
   0%,84%  { opacity: 0; }
@@ -495,44 +498,40 @@ nav {
   97%     { transform: scale(1.6); opacity: 0; }
   100%    { opacity: 0; }
 }
-.hiw-steps.animated .s1-cursor { animation: s1CursorMove 2s 0s cubic-bezier(.4,0,.2,1) both; }
-.hiw-steps.animated .s1-li1    { animation: s1Li1 2s 0s both; }
-.hiw-steps.animated .s1-li2    { animation: s1Li2 2s 0s both; }
-.hiw-steps.animated .s1-li3    { animation: s1Li3 2s 0s both; }
-.hiw-steps.animated .s1-dot3   { animation: s1DotSelect 2s 0s both; }
-.hiw-steps.animated .s1-ripple { transform-origin: 28px 55px; animation: s1Ripple 2s 0s both; }
+.hiw-steps.animated .s1-cursor   { animation: s1CursorMove 2s 0s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s1-li1      { animation: s1Li1 2s 0s both; }
+.hiw-steps.animated .s1-li2      { animation: s1Li2 2s 0s both; }
+.hiw-steps.animated .s1-li3      { animation: s1Li3 2s 0s both; }
+.hiw-steps.animated .s1-selected { animation: s1Selected 2s 0s both; }
+.hiw-steps.animated .s1-dot3     { animation: s1DotSelect 2s 0s both; }
+.hiw-steps.animated .s1-ripple   { transform-origin: 38px 64px; animation: s1Ripple 2s 0s both; }
 
 /* ── STEP 2: cursor drags image up from below into drop zone → checkmark ── */
 @keyframes s2Drag {
-  0%,5%   { transform: translateY(96px); opacity:0; }
-  12%     { transform: translateY(96px); opacity:1; }
+  0%,5%   { transform: translateY(90px); opacity:0; }
+  12%     { transform: translateY(90px); opacity:1; }
   72%,100%{ transform: translateY(0); }
 }
 @keyframes s2CursorDrag {
-  0%,5%   { transform: translate(119px, 116px); opacity:0; }
-  12%     { transform: translate(119px, 116px); opacity:1; }
-  72%,100%{ transform: translate(119px, 62px); opacity:1; }
-}
-@keyframes s2Zone {
-  0%,60%  { stroke: var(--border); fill: transparent; }
-  80%,100%{ stroke: #C8E62E; fill: rgba(200,230,46,0.12); }
+  0%,5%   { transform: translate(100px, 112px); opacity:0; }
+  12%     { transform: translate(100px, 112px); opacity:1; }
+  72%,100%{ transform: translate(100px, 72px); opacity:1; }
 }
 @keyframes s2Check {
-  0%,72%  { stroke-dashoffset: 70; opacity:0; }
+  0%,72%  { stroke-dashoffset: 50; opacity:0; }
   78%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
 .hiw-steps.animated .s2-thumb  { animation: s2Drag       2s 2.4s cubic-bezier(.16,1,.3,1) both; }
 .hiw-steps.animated .s2-cursor { animation: s2CursorDrag 2s 2.4s cubic-bezier(.16,1,.3,1) both; }
-.hiw-steps.animated .s2-zone   { animation: s2Zone  2s 2.4s both; }
 .hiw-steps.animated .s2-check  { animation: s2Check 2s 2.4s both; }
 
-/* ── STEP 3: cursor clicks button → progress bar fills → circle checkmark ── */
+/* ── STEP 3: cursor clicks button → checkmark badge appears in title bar ── */
 @keyframes s3CursorClick {
   0%      { transform: translate(170px, 100px); }
-  28%     { transform: translate(99px, 99px); }
-  40%     { transform: translate(99px, 101px); }
-  52%,100%{ transform: translate(99px, 99px); }
+  28%     { transform: translate(127px, 96px); }
+  40%     { transform: translate(127px, 98px); }
+  52%,100%{ transform: translate(127px, 96px); }
 }
 @keyframes s3BtnClick {
   0%,36%  { transform: scale(1); }
@@ -540,23 +539,18 @@ nav {
   55%     { transform: scale(1.03); }
   62%,100%{ transform: scale(1); }
 }
-@keyframes s3BarFill {
-  0%,38%  { transform: scaleX(0); }
-  88%,100%{ transform: scaleX(1); }
-}
 @keyframes s3CardAppear {
   0%,72%  { transform: scale(0); opacity:0; }
   80%     { transform: scale(1.15); opacity:1; }
   90%,100%{ transform: scale(1); opacity:1; }
 }
 @keyframes s3Check {
-  0%,70%  { stroke-dashoffset: 30; opacity:0; }
+  0%,70%  { stroke-dashoffset: 20; opacity:0; }
   76%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
 .hiw-steps.animated .s3-cursor { animation: s3CursorClick 2s 4.8s cubic-bezier(.4,0,.2,1) both; }
 .hiw-steps.animated .s3-btn    { animation: s3BtnClick    2s 4.8s cubic-bezier(.4,0,.2,1) both; }
-.hiw-steps.animated .s3-bar    { animation: s3BarFill     2s 4.8s cubic-bezier(.4,0,.2,1) both; }
 .hiw-steps.animated .s3-card   { animation: s3CardAppear  2s 4.8s cubic-bezier(.16,1,.3,1) both; }
 .hiw-steps.animated .s3-check  { animation: s3Check       2s 4.8s both; }
 .step-body {
@@ -819,7 +813,7 @@ nav {
    EDITORIAL QUOTE
 ══════════════════════════════════════ */
 .editorial-quote {
-  padding: 120px var(--gutter);
+  padding: 120px var(--gutter) 0;
 }
 .eq-inner {
   display: flex;
@@ -1364,23 +1358,21 @@ footer {
             <circle cx="30" cy="16" r="2.5" fill="#69D353"/>
             <rect x="73" y="11" width="54" height="8" rx="4" fill="rgba(17,17,18,0.08)"/>
             <line x1="8" y1="24" x2="192" y2="24" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
-            <!-- Sidebar -->
-            <rect x="8" y="24" width="44" height="116" fill="rgba(17,17,18,0.04)"/>
-            <line x1="52" y1="24" x2="52" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
-            <!-- Sidebar list items (animated) -->
-            <rect x="14" y="30" width="32" height="6" rx="3" class="s1-li1" fill="var(--border)"/>
-            <rect x="14" y="41" width="24" height="6" rx="3" class="s1-li2" fill="var(--border)"/>
-            <rect x="14" y="52" width="28" height="6" rx="3" class="s1-li3" fill="var(--border)"/>
-            <rect x="14" y="63" width="20" height="6" rx="3" fill="var(--border)"/>
-            <rect x="14" y="74" width="26" height="6" rx="3" fill="var(--border)"/>
-            <!-- Selection dot on item 3 -->
-            <circle cx="11" cy="55" r="2" class="s1-dot3" fill="var(--accent)" style="opacity:0;"/>
-            <!-- Content area skeleton -->
-            <rect x="58" y="30" width="68" height="7" rx="3" fill="rgba(17,17,18,0.06)"/>
-            <rect x="58" y="43" width="50" height="5" rx="2.5" fill="rgba(17,17,18,0.04)"/>
-            <rect x="58" y="54" width="122" height="44" rx="6" fill="rgba(17,17,18,0.04)"/>
-            <!-- Ripple on item 3 click -->
-            <circle cx="28" cy="55" r="8" fill="none" stroke="var(--accent)" stroke-width="1.2" class="s1-ripple" style="transform-origin:28px 55px; transform:scale(0);"/>
+            <!-- Sidebar (wider) -->
+            <rect x="8" y="24" width="62" height="116" fill="rgba(17,17,18,0.05)"/>
+            <line x1="70" y1="24" x2="70" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+            <!-- Sidebar list items — white, animated hover -->
+            <rect x="13" y="30" width="50" height="9" rx="4" class="s1-li1" fill="rgba(255,255,255,0.7)"/>
+            <rect x="13" y="45" width="50" height="9" rx="4" class="s1-li2" fill="rgba(255,255,255,0.7)"/>
+            <rect x="13" y="60" width="50" height="9" rx="4" class="s1-li3" fill="rgba(255,255,255,0.7)"/>
+            <rect x="13" y="75" width="50" height="9" rx="4" fill="rgba(255,255,255,0.7)"/>
+            <!-- Green selected bar + dot (appear after click) -->
+            <rect x="13" y="92" width="36" height="8" rx="4" class="s1-selected" fill="var(--accent)" style="opacity:0;"/>
+            <circle cx="53" cy="96" r="2" class="s1-dot3" fill="rgba(17,17,18,0.35)" style="opacity:0;"/>
+            <!-- Content area: single neutral block -->
+            <rect x="74" y="28" width="110" height="78" rx="6" fill="rgba(17,17,18,0.07)"/>
+            <!-- Ripple on click -->
+            <circle cx="38" cy="64" r="8" fill="none" stroke="var(--accent)" stroke-width="1.2" class="s1-ripple" style="transform-origin:38px 64px; transform:scale(0);"/>
             <!-- Cursor -->
             <g class="s1-cursor" style="transform:translate(170px,96px)">
               <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
@@ -1410,30 +1402,30 @@ footer {
             <circle cx="30" cy="16" r="2.5" fill="#69D353"/>
             <rect x="73" y="11" width="54" height="8" rx="4" fill="rgba(17,17,18,0.08)"/>
             <line x1="8" y1="24" x2="192" y2="24" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
-            <!-- Sidebar -->
-            <rect x="8" y="24" width="44" height="116" fill="rgba(17,17,18,0.04)"/>
-            <line x1="52" y1="24" x2="52" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
-            <!-- Sidebar static items -->
-            <rect x="14" y="30" width="30" height="6" rx="3" fill="rgba(200,230,46,0.6)"/>
-            <rect x="14" y="41" width="22" height="6" rx="3" fill="var(--border)"/>
-            <rect x="14" y="52" width="26" height="6" rx="3" fill="var(--border)"/>
-            <rect x="14" y="63" width="18" height="6" rx="3" fill="var(--border)"/>
-            <!-- Drop zone (dashed, animated) — same size as thumbnail -->
-            <rect x="62" y="30" width="118" height="68" rx="8" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
+            <!-- Sidebar (wider) -->
+            <rect x="8" y="24" width="62" height="116" fill="rgba(17,17,18,0.05)"/>
+            <line x1="70" y1="24" x2="70" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+            <!-- Sidebar items — neutral grey -->
+            <rect x="13" y="30" width="50" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <rect x="13" y="45" width="42" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <rect x="13" y="60" width="46" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <rect x="13" y="75" width="38" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <!-- Drop zone (dashed accent border, light green fill — static) -->
+            <rect x="74" y="28" width="110" height="70" rx="8" stroke-width="1.5" stroke-dasharray="5 3" fill="rgba(200,230,46,0.18)" stroke="var(--accent)"/>
             <!-- Drop zone plus icon -->
-            <line x1="121" y1="59" x2="121" y2="69" stroke="rgba(17,17,18,0.18)" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="116" y1="64" x2="126" y2="64" stroke="rgba(17,17,18,0.18)" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Thumbnail flying in from below (same size as drop zone) -->
-            <g class="s2-thumb" style="transform:translateY(96px);">
-              <rect x="62" y="30" width="118" height="68" rx="8" fill="rgba(200,230,46,0.35)"/>
-              <rect x="68" y="36" width="80" height="48" rx="6" fill="rgba(200,230,46,0.55)"/>
+            <line x1="129" y1="58" x2="129" y2="68" stroke="rgba(17,17,18,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="124" y1="63" x2="134" y2="63" stroke="rgba(17,17,18,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Thumbnail (solid accent, flies in from below into drop zone) -->
+            <g class="s2-thumb" style="transform:translateY(90px);">
+              <rect x="78" y="52" width="48" height="40" rx="7" fill="var(--accent)"/>
+              <rect x="84" y="58" width="30" height="20" rx="4" fill="rgba(255,255,255,0.22)"/>
             </g>
             <!-- Cursor (drags thumb upward) -->
-            <g class="s2-cursor" style="transform:translate(119px,116px); opacity:0;">
+            <g class="s2-cursor" style="transform:translate(100px,112px); opacity:0;">
               <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
             </g>
-            <!-- Checkmark centered in drop zone -->
-            <polyline points="104,64 117,78 138,46" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:70;stroke-dashoffset:70;"/>
+            <!-- Checkmark (appears when thumb lands) -->
+            <polyline points="115,63 127,75 145,47" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
           </g>
           <rect x="8" y="8" width="184" height="140" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
         </svg>
@@ -1458,31 +1450,28 @@ footer {
             <circle cx="23" cy="16" r="2.5" fill="#F7C154"/>
             <circle cx="30" cy="16" r="2.5" fill="#69D353"/>
             <rect x="73" y="11" width="54" height="8" rx="4" fill="rgba(17,17,18,0.08)"/>
-            <line x1="8" y1="24" x2="192" y2="24" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
-            <!-- Sidebar -->
-            <rect x="8" y="24" width="44" height="116" fill="rgba(17,17,18,0.04)"/>
-            <line x1="52" y1="24" x2="52" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
-            <!-- Sidebar: first item highlighted -->
-            <rect x="14" y="30" width="32" height="6" rx="3" fill="rgba(200,230,46,0.7)"/>
-            <rect x="14" y="41" width="24" height="6" rx="3" fill="var(--border)"/>
-            <rect x="14" y="52" width="28" height="6" rx="3" fill="var(--border)"/>
-            <rect x="14" y="63" width="20" height="6" rx="3" fill="var(--border)"/>
-            <!-- Content: image preview -->
-            <rect x="56" y="28" width="130" height="42" rx="6" fill="rgba(200,230,46,0.18)"/>
-            <rect x="60" y="32" width="90" height="32" rx="4" fill="rgba(200,230,46,0.28)"/>
-            <!-- Progress bar track -->
-            <rect x="56" y="80" width="120" height="7" rx="3.5" fill="rgba(17,17,18,0.08)"/>
-            <!-- Progress bar fill (animated) -->
-            <rect x="56" y="80" width="120" height="7" rx="3.5" fill="var(--accent)" class="s3-bar" style="transform-origin:56px 83.5px; transform:scaleX(0);"/>
-            <!-- Completion circle -->
-            <g class="s3-card" style="transform:scale(0); transform-origin:176px 83.5px; opacity:0;">
-              <circle cx="176" cy="83.5" r="9" fill="var(--accent)"/>
+            <!-- Checkmark badge in title bar top-right (animated) -->
+            <g class="s3-card" style="transform:scale(0); transform-origin:183px 16px; opacity:0;">
+              <rect x="176" y="9" width="14" height="14" rx="3" fill="var(--accent)"/>
             </g>
-            <!-- Checkmark on circle (small) -->
-            <polyline points="173,83.5 176,87 181.5,79" fill="none" stroke="#111112" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="s3-check" style="stroke-dasharray:30;stroke-dashoffset:30;"/>
-            <!-- Button (no strip) -->
-            <g class="s3-btn" style="transform-origin:101px 101px;">
-              <rect x="66" y="94" width="70" height="14" rx="7" fill="var(--accent)"/>
+            <polyline points="179,16 182,19.5 187,12.5" fill="none" stroke="#111112" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="s3-check" style="stroke-dasharray:20;stroke-dashoffset:20;"/>
+            <line x1="8" y1="24" x2="192" y2="24" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+            <!-- Sidebar (wider) -->
+            <rect x="8" y="24" width="62" height="116" fill="rgba(17,17,18,0.05)"/>
+            <line x1="70" y1="24" x2="70" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+            <!-- Sidebar items — neutral grey -->
+            <rect x="13" y="30" width="50" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <rect x="13" y="45" width="42" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <rect x="13" y="60" width="46" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <rect x="13" y="75" width="38" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <!-- Content: stacked grey items (all neutral) -->
+            <rect x="74" y="30" width="110" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
+            <rect x="74" y="45" width="96" height="9" rx="4" fill="rgba(17,17,18,0.08)"/>
+            <rect x="74" y="60" width="104" height="9" rx="4" fill="rgba(17,17,18,0.08)"/>
+            <rect x="74" y="75" width="88" height="9" rx="4" fill="rgba(17,17,18,0.06)"/>
+            <!-- Green button at bottom — only active element -->
+            <g class="s3-btn" style="transform-origin:129px 98px;">
+              <rect x="74" y="92" width="110" height="13" rx="6" fill="var(--accent)"/>
             </g>
             <!-- Cursor -->
             <g class="s3-cursor" style="transform:translate(170px,100px);">
