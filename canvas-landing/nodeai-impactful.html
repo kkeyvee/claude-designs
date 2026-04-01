@@ -501,10 +501,18 @@ nav {
 @keyframes s2Drag {
   0%,8%   { transform: translate(0,0) scale(1); opacity:1; }
   20%     { transform: translate(2px,-7px) scale(1.06); opacity:.9; }
-  65%     { transform: translate(88px,-5px) scale(1.06); opacity:.9; }
-  80%     { transform: translate(88px, 5px) scale(.97); opacity:1; }
-  90%     { transform: translate(88px,-2px) scale(1); }
-  100%    { transform: translate(88px, 0) scale(1); }
+  65%     { transform: translate(101px,-5px) scale(1.06); opacity:.9; }
+  80%     { transform: translate(101px, 3px) scale(.97); opacity:1; }
+  90%     { transform: translate(101px,-1px) scale(1); }
+  100%    { transform: translate(101px, 0) scale(1); }
+}
+@keyframes s2CursorDrag {
+  0%      { transform: translate(68px, 28px); opacity:0; }
+  7%      { transform: translate(68px, 28px); opacity:1; }
+  20%     { transform: translate(70px, 21px); opacity:1; }
+  65%     { transform: translate(169px, 23px); opacity:1; }
+  80%     { transform: translate(169px, 32px); opacity:1; }
+  100%    { transform: translate(169px, 28px); opacity:1; }
 }
 @keyframes s2Zone {
   0%,60%  { stroke: var(--border); fill: transparent; }
@@ -515,9 +523,10 @@ nav {
   78%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
-.hiw-steps.animated .s2-thumb { animation: s2Drag  2s 2.4s cubic-bezier(.4,0,.2,1) both; }
-.hiw-steps.animated .s2-zone  { animation: s2Zone  2s 2.4s both; }
-.hiw-steps.animated .s2-check { animation: s2Check 2s 2.4s both; }
+.hiw-steps.animated .s2-thumb  { animation: s2Drag       2s 2.4s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s2-cursor { animation: s2CursorDrag 2s 2.4s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s2-zone   { animation: s2Zone  2s 2.4s both; }
+.hiw-steps.animated .s2-check  { animation: s2Check 2s 2.4s both; }
 
 /* ── STEP 3: download ── */
 @keyframes s3Arrow {
@@ -1354,9 +1363,15 @@ footer {
         <svg class="step-svg" viewBox="0 0 200 100">
           <!-- drop zone (right) -->
           <rect x="118" y="18" width="62" height="64" rx="10" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
-          <!-- thumbnail (draggable) -->
-          <rect x="20" y="23" width="56" height="56" rx="8" fill="rgba(200,230,46,0.35)" class="s2-thumb"/>
-          <rect x="28" y="31" width="40" height="28" rx="4" fill="rgba(200,230,46,0.5)"/>
+          <!-- thumbnail group (both rects move together) -->
+          <g class="s2-thumb">
+            <rect x="20" y="23" width="56" height="56" rx="8" fill="rgba(200,230,46,0.35)"/>
+            <rect x="28" y="31" width="40" height="28" rx="4" fill="rgba(200,230,46,0.5)"/>
+          </g>
+          <!-- cursor follows thumb -->
+          <g class="s2-cursor" style="transform:translate(68px,28px); opacity:0;">
+            <path d="M2,2 L2,24 L7,19 L11,27 L15,25 L11,17 L18,17 Z" fill="#111112" stroke="white" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          </g>
           <!-- check in zone -->
           <polyline points="131,52 141,62 158,42" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
         </svg>
