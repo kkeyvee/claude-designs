@@ -1173,6 +1173,10 @@ footer {
   .nav-auth  { display: none; }
   .nav-burger { display: flex; }
 
+  /* HIW → mobile layout */
+  .hiw { padding: 80px 0 0; }
+  .hiw-top { padding: 0 var(--gutter); margin-bottom: 32px; }
+
   /* HIW steps → horizontal scroll carousel */
   .hiw-steps {
     display: flex;
@@ -1181,20 +1185,21 @@ footer {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 12px;
-    padding-bottom: 8px;
+    padding: 0 var(--gutter) 24px;
     scrollbar-width: none;
   }
   .hiw-steps::-webkit-scrollbar { display: none; }
   .step-card {
-    flex: 0 0 72vw;
+    flex: 0 0 80vw;
     scroll-snap-align: start;
     min-width: 0;
+    border-radius: 16px;
   }
 
   /* Solutions → horizontal scroll carousel */
   .solutions { padding: 80px 0 0; }
   .solutions-top { padding: 0 var(--gutter); margin-bottom: 32px; flex-direction: column; align-items: flex-start; gap: 20px; }
-  .solutions-title { font-size: clamp(28px, 7vw, 40px); }
+  .solutions-title { font-size: clamp(32px, 8vw, 48px); }
   .sol-4-grid {
     display: flex;
     flex-direction: row;
@@ -1209,13 +1214,14 @@ footer {
   .sol-card,
   .sol-soon,
   .sol-product {
-    flex: 0 0 72vw;
+    flex: 0 0 80vw;
     min-width: 0;
     scroll-snap-align: start;
     grid-column: unset !important;
+    border-radius: 16px;
   }
   .sol-product-photos { grid-template-columns: repeat(3, 1fr); padding: 12px 12px 0; }
-  .sol-product-photos img { aspect-ratio: 4/3; border-radius: 10px; }
+  .sol-product-photos img { aspect-ratio: 4/3; border-radius: 12px; }
 
   /* span2 + product: description under title, image fills space */
   .sol-span2 .sol-card-body,
@@ -1234,14 +1240,15 @@ footer {
 
 @media (max-width: 768px) {
   :root { --gutter: 20px; }
-  .hero { padding-top: 112px; }
-  .hero-text { align-items: flex-start; gap: 24px; }
+  .hero { padding-top: 112px; padding-bottom: 80px; }
+  .hero-text { align-items: flex-start; gap: 24px; padding: 0 var(--gutter); }
   .hero-right { width: 100%; max-width: 100%; }
   .hero-images {
     flex-direction: column;
     height: auto;
     gap: 8px;
     margin-top: 24px;
+    padding: 0 var(--gutter);
   }
   /* верхний ряд: 2 карточки рядом */
   .hero-images-row {
@@ -1264,8 +1271,13 @@ footer {
   /* третья — скрываем на мобиле */
   .hero-card:nth-child(3) { display: none; }
   .stats { grid-template-columns: 1fr; }
+  .stat-card { padding: 24px 28px; }
   .hiw-steps { grid-template-columns: 1fr; }
-  .pricing-cards { grid-template-columns: 1fr; }
+  /* Pricing → mobile layout */
+  .pricing { padding: 80px 0 0; }
+  .pricing-top { padding: 0 var(--gutter); }
+  .pricing-cards { grid-template-columns: 1fr; padding: 0 var(--gutter); }
+  .plan-card { padding: 32px 28px; }
   /* Gallery → horizontal scroll carousel */
   .gallery { padding: 80px 0 0; }
   .gallery > div:first-child { padding: 0 var(--gutter); margin-bottom: 32px; }
@@ -1275,13 +1287,13 @@ footer {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 12px;
-    padding: 0 var(--gutter) 12px;
+    padding: 0 var(--gutter) 24px;
     scrollbar-width: none;
   }
   .gallery-grid::-webkit-scrollbar { display: none; }
   .gallery-row { display: contents; }
   .gallery-card {
-    flex: 0 0 72vw;
+    flex: 0 0 80vw;
     scroll-snap-align: start;
     height: 400px;
     border-radius: 16px;
@@ -1292,6 +1304,7 @@ footer {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+    padding: 24px var(--gutter);
   }
   .footer-copy {
     position: static;
@@ -1303,9 +1316,9 @@ footer {
   .sol-card-img { height: 160px; }
   .sol-soon .sol-card-img { height: 160px; }
   .sol-product-photos { grid-template-columns: repeat(3, 1fr); }
-  .sol-product-photos img { aspect-ratio: 4/3; border-radius: 10px; }
+  .sol-product-photos img { aspect-ratio: 4/3; border-radius: 12px; }
 
-  .final-cta { padding: 80px 32px; margin: 40px 20px 0; }
+  .final-cta { padding: 80px var(--gutter); margin: 40px var(--gutter) 0; }
   .eq-text { font-size: clamp(36px, 9vw, 60px); }
 
   /* teaser-карточка — показываем */
