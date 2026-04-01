@@ -302,7 +302,7 @@ nav {
   padding: 80px var(--gutter);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 12px;
 }
 .stat-card {
   background: var(--bg-card);
@@ -1104,6 +1104,58 @@ footer {
 /* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
+/* ── Burger button ── */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile nav overlay ── */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 78px;
+  left: 0; right: 0;
+  background: rgba(245,244,240,0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 20px 20px;
+  flex-direction: column;
+  z-index: 99;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile-link {
+  font-size: 16px;
+  color: var(--text);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+}
+.nav-mobile-link:last-of-type { border-bottom: none; }
+.nav-mobile-cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
 /* Teaser card — desktop hidden */
 .sol-teaser { display: none; }
 
@@ -1115,9 +1167,33 @@ footer {
   .hiw-desc { margin-left: 0; }
 }
 
+@media (max-width: 900px) {
+  /* Nav collapse → burger */
+  .nav-links { display: none; }
+  .nav-auth  { display: none; }
+  .nav-burger { display: flex; }
+
+  /* HIW steps → horizontal scroll carousel */
+  .hiw-steps {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .hiw-steps::-webkit-scrollbar { display: none; }
+  .step-card {
+    flex: 0 0 72vw;
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+}
+
 @media (max-width: 768px) {
   :root { --gutter: 20px; }
-  .nav-links { display: none; }
   .hero { padding-top: 112px; }
   .hero-text { align-items: flex-start; gap: 24px; }
   .hero-right { width: 100%; max-width: 100%; }
@@ -1150,8 +1226,45 @@ footer {
   .stats { grid-template-columns: 1fr; }
   .hiw-steps { grid-template-columns: 1fr; }
   .pricing-cards { grid-template-columns: 1fr; }
-  .gallery-row { height: 180px; }
-  .gallery-grid .gallery-row:last-child { display: none; }
+  /* Gallery → horizontal scroll carousel */
+  .gallery { padding: 80px 0 0; }
+  .gallery > div:first-child { padding: 0 var(--gutter); margin-bottom: 32px; }
+  .gallery-grid {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding: 0 var(--gutter) 12px;
+    scrollbar-width: none;
+  }
+  .gallery-grid::-webkit-scrollbar { display: none; }
+  .gallery-row { display: contents; }
+  .gallery-card {
+    flex: 0 0 72vw;
+    scroll-snap-align: start;
+    height: 200px;
+    border-radius: 16px;
+  }
+
+  /* Footer → stack vertically */
+  footer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  .footer-copy {
+    position: static;
+    transform: none;
+  }
+  .footer-links { justify-content: center; }
+
+  /* Solution card images — less tall */
+  .sol-card-img { height: 160px; }
+  .sol-soon .sol-card-img { height: 160px; }
+  .sol-product-photos { grid-template-columns: repeat(3, 1fr); }
+  .sol-product-photos img { aspect-ratio: 4/3; border-radius: 10px; }
+
   .final-cta { padding: 80px 32px; margin: 40px 20px 0; }
   .eq-text { font-size: clamp(36px, 9vw, 60px); }
 
@@ -1297,6 +1410,20 @@ footer {
     <div class="nav-right">
       <a href="#" class="nav-auth">Авторизация</a>
       <a href="#pricing" class="btn-start">Начать</a>
+      <button class="nav-burger" id="navBurger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile nav overlay -->
+  <div class="nav-mobile" id="navMobile">
+    <a href="#how" class="nav-mobile-link">Как это работает</a>
+    <a href="#solutions" class="nav-mobile-link">Решения</a>
+    <a href="#gallery" class="nav-mobile-link">Галерея</a>
+    <a href="#pricing" class="nav-mobile-link">Цена</a>
+    <div class="nav-mobile-cta">
+      <a href="#" class="nav-auth" style="flex:1;text-align:center;">Авторизация</a>
+      <a href="#pricing" class="btn-start" style="flex:1;text-align:center;">Начать</a>
     </div>
   </div>
 </nav>
@@ -1725,6 +1852,23 @@ footer {
 
   sections.forEach(s => navObserver.observe(s));
 
+  // Burger menu toggle
+  const navBurger = document.getElementById('navBurger');
+  const navMobile = document.getElementById('navMobile');
+  if (navBurger && navMobile) {
+    navBurger.addEventListener('click', () => {
+      navBurger.classList.toggle('open');
+      navMobile.classList.toggle('open');
+    });
+    // Close on link click
+    navMobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navBurger.classList.remove('open');
+        navMobile.classList.remove('open');
+      });
+    });
+  }
+
   // Step card animations + auto-replay
   const hiwSteps = document.querySelector('.hiw-steps');
   if (hiwSteps) {
@@ -1736,15 +1880,20 @@ footer {
       // total anim: 4.8s delay + 2s = 6.8s, then 4s pause before replay
       replayTimer = setTimeout(startHiwAnim, 10800);
     }
+    function stopHiwAnim() {
+      clearTimeout(replayTimer);
+      replayTimer = null;
+      hiwSteps.classList.remove('animated');
+    }
     const stepObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          clearTimeout(replayTimer);
-          startHiwAnim();
-          stepObserver.unobserve(entry.target);
+          if (!replayTimer) startHiwAnim();
+        } else {
+          stopHiwAnim();
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2 });
     stepObserver.observe(hiwSteps);
   }
 
