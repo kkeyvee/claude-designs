@@ -478,16 +478,12 @@ nav {
   64%     { fill: rgba(255,255,255,0.7); }
   100%    { fill: rgba(255,255,255,0.7); }
 }
+/* item 3: hover → click flash → stays green (selected) */
 @keyframes s1Li3 {
   0%,68%  { fill: rgba(255,255,255,0.7); }
   74%,80% { fill: rgba(255,255,255,0.98); }
   84%     { fill: rgba(255,255,255,1); }
-  90%,100%{ fill: rgba(255,255,255,0.7); }
-}
-/* selected bar appears after click */
-@keyframes s1Selected {
-  0%,82%  { opacity: 0; }
-  90%,100%{ opacity: 1; }
+  90%,100%{ fill: #C8E62E; }
 }
 @keyframes s1DotSelect {
   0%,84%  { opacity: 0; }
@@ -498,40 +494,39 @@ nav {
   97%     { transform: scale(1.6); opacity: 0; }
   100%    { opacity: 0; }
 }
-.hiw-steps.animated .s1-cursor   { animation: s1CursorMove 2s 0s cubic-bezier(.4,0,.2,1) both; }
-.hiw-steps.animated .s1-li1      { animation: s1Li1 2s 0s both; }
-.hiw-steps.animated .s1-li2      { animation: s1Li2 2s 0s both; }
-.hiw-steps.animated .s1-li3      { animation: s1Li3 2s 0s both; }
-.hiw-steps.animated .s1-selected { animation: s1Selected 2s 0s both; }
-.hiw-steps.animated .s1-dot3     { animation: s1DotSelect 2s 0s both; }
-.hiw-steps.animated .s1-ripple   { transform-origin: 38px 64px; animation: s1Ripple 2s 0s both; }
+.hiw-steps.animated .s1-cursor { animation: s1CursorMove 2s 0s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s1-li1    { animation: s1Li1 2s 0s both; }
+.hiw-steps.animated .s1-li2    { animation: s1Li2 2s 0s both; }
+.hiw-steps.animated .s1-li3    { animation: s1Li3 2s 0s both; }
+.hiw-steps.animated .s1-dot3   { animation: s1DotSelect 2s 0s both; }
+.hiw-steps.animated .s1-ripple { transform-origin: 38px 64px; animation: s1Ripple 2s 0s both; }
 
-/* ── STEP 2: cursor drags image up from below into drop zone → checkmark ── */
+/* ── STEP 2: cursor enters zone → thumbnail scales up from cursor to fill zone ── */
 @keyframes s2Drag {
-  0%,5%   { transform: translateY(90px); opacity:0; }
-  12%     { transform: translateY(90px); opacity:1; }
-  72%,100%{ transform: translateY(0); }
+  0%,45%  { transform: scale(0); opacity:0; }
+  52%     { transform: scale(0); opacity:1; }
+  80%,100%{ transform: scale(1); opacity:1; }
 }
 @keyframes s2CursorDrag {
-  0%,5%   { transform: translate(100px, 112px); opacity:0; }
-  12%     { transform: translate(100px, 112px); opacity:1; }
-  72%,100%{ transform: translate(100px, 72px); opacity:1; }
+  0%,5%   { transform: translate(127px, 118px); opacity:0; }
+  12%     { transform: translate(127px, 118px); opacity:1; }
+  55%,100%{ transform: translate(127px, 61px); opacity:1; }
 }
 @keyframes s2Check {
-  0%,72%  { stroke-dashoffset: 50; opacity:0; }
-  78%     { opacity:1; }
+  0%,80%  { stroke-dashoffset: 50; opacity:0; }
+  86%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
-.hiw-steps.animated .s2-thumb  { animation: s2Drag       2s 2.4s cubic-bezier(.16,1,.3,1) both; }
+.hiw-steps.animated .s2-thumb  { transform-origin: 129px 63px; animation: s2Drag 2s 2.4s cubic-bezier(.16,1,.3,1) both; }
 .hiw-steps.animated .s2-cursor { animation: s2CursorDrag 2s 2.4s cubic-bezier(.16,1,.3,1) both; }
 .hiw-steps.animated .s2-check  { animation: s2Check 2s 2.4s both; }
 
-/* ── STEP 3: cursor clicks button → checkmark badge appears in title bar ── */
+/* ── STEP 3: cursor clicks button → grid cell flies to badge → checkmark ── */
 @keyframes s3CursorClick {
-  0%      { transform: translate(170px, 100px); }
-  28%     { transform: translate(127px, 96px); }
-  40%     { transform: translate(127px, 98px); }
-  52%,100%{ transform: translate(127px, 96px); }
+  0%      { transform: translate(170px, 105px); }
+  28%     { transform: translate(127px, 97px); }
+  40%     { transform: translate(127px, 99px); }
+  52%,100%{ transform: translate(127px, 97px); }
 }
 @keyframes s3BtnClick {
   0%,36%  { transform: scale(1); }
@@ -539,18 +534,26 @@ nav {
   55%     { transform: scale(1.03); }
   62%,100%{ transform: scale(1); }
 }
+/* flying grid cell: translates from grid center to badge position, fades */
+@keyframes s3Fly {
+  0%,36%  { transform: translate(0,0) scale(1); opacity:1; }
+  70%     { transform: translate(54px,-42.5px) scale(0.45); opacity:1; }
+  76%,100%{ transform: translate(54px,-42.5px) scale(0.45); opacity:0; }
+}
+/* badge pops after cell arrives */
 @keyframes s3CardAppear {
-  0%,72%  { transform: scale(0); opacity:0; }
-  80%     { transform: scale(1.15); opacity:1; }
-  90%,100%{ transform: scale(1); opacity:1; }
+  0%,70%  { transform: scale(0); opacity:0; }
+  78%     { transform: scale(1.15); opacity:1; }
+  84%,100%{ transform: scale(1); opacity:1; }
 }
 @keyframes s3Check {
-  0%,70%  { stroke-dashoffset: 20; opacity:0; }
-  76%     { opacity:1; }
+  0%,76%  { stroke-dashoffset: 20; opacity:0; }
+  82%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
 .hiw-steps.animated .s3-cursor { animation: s3CursorClick 2s 4.8s cubic-bezier(.4,0,.2,1) both; }
 .hiw-steps.animated .s3-btn    { animation: s3BtnClick    2s 4.8s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s3-fly    { transform-origin: 129px 58.5px; animation: s3Fly 2s 4.8s cubic-bezier(.4,0,.2,1) both; }
 .hiw-steps.animated .s3-card   { animation: s3CardAppear  2s 4.8s cubic-bezier(.16,1,.3,1) both; }
 .hiw-steps.animated .s3-check  { animation: s3Check       2s 4.8s both; }
 .step-body {
@@ -1319,7 +1322,7 @@ footer {
 
 <!-- ════════════ STATS ════════════ -->
 <section style="padding: 0 var(--gutter);">
-  <div class="stats" style="padding: 80px 0;">
+  <div class="stats" style="padding: 24px 0;">
     <div class="stat-card">
       <div class="stat-value">50 000+</div>
       <div class="stat-label">Обработано картинок</div>
@@ -1366,9 +1369,8 @@ footer {
             <rect x="13" y="45" width="50" height="9" rx="4" class="s1-li2" fill="rgba(255,255,255,0.7)"/>
             <rect x="13" y="60" width="50" height="9" rx="4" class="s1-li3" fill="rgba(255,255,255,0.7)"/>
             <rect x="13" y="75" width="50" height="9" rx="4" fill="rgba(255,255,255,0.7)"/>
-            <!-- Green selected bar + dot (appear after click) -->
-            <rect x="13" y="92" width="36" height="8" rx="4" class="s1-selected" fill="var(--accent)" style="opacity:0;"/>
-            <circle cx="53" cy="96" r="2" class="s1-dot3" fill="rgba(17,17,18,0.35)" style="opacity:0;"/>
+            <!-- Selection dot — appears beside item 3 after click -->
+            <circle cx="11" cy="64.5" r="2" class="s1-dot3" fill="var(--accent)" style="opacity:0;"/>
             <!-- Content area: single neutral block -->
             <rect x="74" y="28" width="110" height="78" rx="6" fill="rgba(17,17,18,0.07)"/>
             <!-- Ripple on click -->
@@ -1415,17 +1417,17 @@ footer {
             <!-- Drop zone plus icon -->
             <line x1="129" y1="58" x2="129" y2="68" stroke="rgba(17,17,18,0.2)" stroke-width="1.5" stroke-linecap="round"/>
             <line x1="124" y1="63" x2="134" y2="63" stroke="rgba(17,17,18,0.2)" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Thumbnail (solid accent, flies in from below into drop zone) -->
-            <g class="s2-thumb" style="transform:translateY(90px);">
-              <rect x="78" y="52" width="48" height="40" rx="7" fill="var(--accent)"/>
-              <rect x="84" y="58" width="30" height="20" rx="4" fill="rgba(255,255,255,0.22)"/>
+            <!-- Thumbnail — scales from drop zone centre to fill it entirely -->
+            <g class="s2-thumb" style="transform:scale(0);">
+              <rect x="74" y="28" width="110" height="70" rx="8" fill="var(--accent)"/>
+              <rect x="86" y="40" width="62" height="38" rx="4" fill="rgba(255,255,255,0.22)"/>
             </g>
-            <!-- Cursor (drags thumb upward) -->
-            <g class="s2-cursor" style="transform:translate(100px,112px); opacity:0;">
+            <!-- Cursor (drags thumb up) -->
+            <g class="s2-cursor" style="transform:translate(127px,118px); opacity:0;">
               <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
             </g>
-            <!-- Checkmark (appears when thumb lands) -->
-            <polyline points="115,63 127,75 145,47" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
+            <!-- Checkmark (dark, visible on green) -->
+            <polyline points="115,63 127,75 145,47" fill="none" stroke="rgba(17,17,18,0.75)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
           </g>
           <rect x="8" y="8" width="184" height="140" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
         </svg>
@@ -1464,12 +1466,21 @@ footer {
             <rect x="13" y="45" width="42" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
             <rect x="13" y="60" width="46" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
             <rect x="13" y="75" width="38" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
-            <!-- Content: stacked grey items (all neutral) -->
-            <rect x="74" y="30" width="110" height="9" rx="4" fill="rgba(17,17,18,0.1)"/>
-            <rect x="74" y="45" width="96" height="9" rx="4" fill="rgba(17,17,18,0.08)"/>
-            <rect x="74" y="60" width="104" height="9" rx="4" fill="rgba(17,17,18,0.08)"/>
-            <rect x="74" y="75" width="88" height="9" rx="4" fill="rgba(17,17,18,0.06)"/>
-            <!-- Green button at bottom — only active element -->
+            <!-- Content: 3×3 gallery grid -->
+            <!-- Row 1 -->
+            <rect x="74"  y="29" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <rect x="112" y="29" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <rect x="150" y="29" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <!-- Row 2 -->
+            <rect x="74"  y="50" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <!-- Flying green cell — centre of grid -->
+            <rect x="112" y="50" width="34" height="17" rx="3" fill="var(--accent)" class="s3-fly"/>
+            <rect x="150" y="50" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <!-- Row 3 -->
+            <rect x="74"  y="71" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <rect x="112" y="71" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <rect x="150" y="71" width="34" height="17" rx="3" fill="rgba(17,17,18,0.1)"/>
+            <!-- Green button at bottom — triggers the animation -->
             <g class="s3-btn" style="transform-origin:129px 98px;">
               <rect x="74" y="92" width="110" height="13" rx="6" fill="var(--accent)"/>
             </g>
