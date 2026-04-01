@@ -1190,6 +1190,37 @@ footer {
     scroll-snap-align: start;
     min-width: 0;
   }
+
+  /* Solutions → horizontal scroll carousel */
+  .solutions { padding: 80px 0 0; }
+  .solutions-top { padding: 0 var(--gutter); margin-bottom: 32px; }
+  .solutions-title { font-size: clamp(28px, 7vw, 40px); }
+  .sol-4-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding: 0 var(--gutter) 24px;
+    scrollbar-width: none;
+  }
+  .sol-4-grid::-webkit-scrollbar { display: none; }
+  .sol-card,
+  .sol-soon,
+  .sol-product {
+    flex: 0 0 72vw;
+    min-width: 0;
+    scroll-snap-align: start;
+    grid-column: unset !important;
+  }
+  .sol-product-photos { grid-template-columns: repeat(3, 1fr); padding: 12px 12px 0; }
+  .sol-product-photos img { aspect-ratio: 4/3; border-radius: 10px; }
+  .sol-teaser {
+    display: flex;
+    flex: 0 0 56vw;
+    scroll-snap-align: start;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1267,44 +1298,6 @@ footer {
 
   .final-cta { padding: 80px 32px; margin: 40px 20px 0; }
   .eq-text { font-size: clamp(36px, 9vw, 60px); }
-
-  /* Solutions → горизонтальная карусель */
-  .solutions { padding: 80px 0 0; }
-  .solutions-top { padding: 0 var(--gutter); margin-bottom: 32px; }
-  .solutions-title { font-size: clamp(28px, 7vw, 40px); }
-
-  .sol-4-grid {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 12px;
-    padding: 0 var(--gutter) 24px;
-    /* убираем скроллбар визуально */
-    scrollbar-width: none;
-  }
-  .sol-4-grid::-webkit-scrollbar { display: none; }
-
-  /* каждая карточка — фиксированная ширина */
-  .sol-card,
-  .sol-soon,
-  .sol-product {
-    flex: 0 0 72vw;
-    min-width: 0;
-    scroll-snap-align: start;
-    grid-column: unset !important;
-  }
-
-  /* фото внутри продуктовой — в колонку */
-  .sol-product-photos {
-    grid-template-columns: 1fr;
-    padding: 12px 12px 0;
-  }
-  .sol-product-photos img {
-    aspect-ratio: 16/9;
-    border-radius: 10px;
-  }
 
   /* teaser-карточка — показываем */
   .sol-teaser {
