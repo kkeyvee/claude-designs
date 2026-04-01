@@ -440,41 +440,9 @@ nav {
   background: rgba(17,17,18,0.06);
   border-radius: 16px;
   margin: 8px 8px 0;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
-/* Browser chrome skeleton */
-.browser-chrome {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 12px;
-  height: 26px;
-  flex-shrink: 0;
-  border-bottom: 1px solid rgba(17,17,18,0.08);
-  background: rgba(17,17,18,0.04);
-}
-.browser-dots {
-  display: flex;
-  gap: 5px;
-}
-.browser-dots span {
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--border);
-}
-.browser-bar {
-  flex: 1;
-  height: 12px;
-  background: rgba(17,17,18,0.07);
-  border-radius: 6px;
-  max-width: 96px;
-  margin: 0 auto;
-}
-.step-svg { width: 100%; flex: 1; overflow: visible; }
+.step-svg { width: 100%; height: 100%; display: block; }
 
 /* Card highlight pulse */
 @keyframes stepPulse {
@@ -486,17 +454,17 @@ nav {
 .hiw-steps.animated .step-card:nth-child(2) { animation: stepPulse 2s 2.4s both; }
 .hiw-steps.animated .step-card:nth-child(3) { animation: stepPulse 2s 4.8s both; }
 
-/* ── STEP 1: cursor hovers items → clicks item 3 ── */
+/* ── STEP 1: cursor hovers sidebar items → clicks item 3 ── */
 @keyframes s1CursorMove {
-  0%      { transform: translate(165px, 4px); }
-  14%     { transform: translate(126px, 14px); }  /* hover item 1 */
-  32%     { transform: translate(126px, 14px); }
-  44%     { transform: translate(113px, 34px); }  /* hover item 2 */
-  58%     { transform: translate(113px, 34px); }
-  68%     { transform: translate(119px, 52px); }  /* hover item 3 */
-  78%     { transform: translate(119px, 52px); }
-  84%     { transform: translate(120px, 55px); }  /* press */
-  100%    { transform: translate(119px, 52px); }
+  0%      { transform: translate(170px, 95px); }
+  14%     { transform: translate(22px, 23.5px); }
+  32%     { transform: translate(22px, 23.5px); }
+  44%     { transform: translate(18px, 36.5px); }
+  58%     { transform: translate(18px, 36.5px); }
+  68%     { transform: translate(20px, 49.5px); }
+  78%     { transform: translate(20px, 49.5px); }
+  84%     { transform: translate(20px, 51.5px); }
+  100%    { transform: translate(20px, 49.5px); }
 }
 @keyframes s1Li1 {
   0%,11%  { fill: var(--border); }
@@ -530,31 +498,31 @@ nav {
 .hiw-steps.animated .s1-li2    { animation: s1Li2 2s 0s both; }
 .hiw-steps.animated .s1-li3    { animation: s1Li3 2s 0s both; }
 .hiw-steps.animated .s1-dot3   { animation: s1DotSelect 2s 0s both; }
-.hiw-steps.animated .s1-ripple { transform-origin: 78px 57px; animation: s1Ripple 2s 0s both; }
+.hiw-steps.animated .s1-ripple { transform-origin: 22px 51.5px; animation: s1Ripple 2s 0s both; }
 
-/* ── STEP 2: drag & drop ── */
+/* ── STEP 2: drag thumbnail from sidebar to drop zone ── */
 @keyframes s2Drag {
   0%,8%   { transform: translate(0,0) scale(1); opacity:1; }
-  20%     { transform: translate(2px,-7px) scale(1.06); opacity:.9; }
-  65%     { transform: translate(101px,-5px) scale(1.06); opacity:.9; }
-  80%     { transform: translate(101px, 3px) scale(.97); opacity:1; }
-  90%     { transform: translate(101px,-1px) scale(1); }
-  100%    { transform: translate(101px, 0) scale(1); }
+  20%     { transform: translate(2px,-6px) scale(1.06); opacity:.9; }
+  65%     { transform: translate(74px,14px) scale(1.06); opacity:.9; }
+  80%     { transform: translate(74px,22px) scale(.97); opacity:1; }
+  90%     { transform: translate(74px,18px) scale(1); }
+  100%    { transform: translate(74px,20px) scale(1); }
 }
 @keyframes s2CursorDrag {
-  0%      { transform: translate(68px, 28px); opacity:0; }
-  7%      { transform: translate(68px, 28px); opacity:1; }
-  20%     { transform: translate(70px, 21px); opacity:1; }
-  65%     { transform: translate(169px, 23px); opacity:1; }
-  80%     { transform: translate(169px, 32px); opacity:1; }
-  100%    { transform: translate(169px, 28px); opacity:1; }
+  0%      { transform: translate(22px, 34px); opacity:0; }
+  7%      { transform: translate(22px, 34px); opacity:1; }
+  20%     { transform: translate(24px, 28px); opacity:1; }
+  65%     { transform: translate(96px, 50px); opacity:1; }
+  80%     { transform: translate(96px, 56px); opacity:1; }
+  100%    { transform: translate(96px, 54px); opacity:1; }
 }
 @keyframes s2Zone {
   0%,60%  { stroke: var(--border); fill: transparent; }
   80%,100%{ stroke: #C8E62E; fill: rgba(200,230,46,0.12); }
 }
 @keyframes s2Check {
-  0%,72%  { stroke-dashoffset: 50; opacity:0; }
+  0%,72%  { stroke-dashoffset: 60; opacity:0; }
   78%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
@@ -563,12 +531,12 @@ nav {
 .hiw-steps.animated .s2-zone   { animation: s2Zone  2s 2.4s both; }
 .hiw-steps.animated .s2-check  { animation: s2Check 2s 2.4s both; }
 
-/* ── STEP 3: cursor clicks button → card flies to top-right → checkmark ── */
+/* ── STEP 3: cursor clicks button → progress bar fills → checkmark ── */
 @keyframes s3CursorClick {
-  0%      { transform: translate(168px, 84px); }
-  28%     { transform: translate(91px, 66px); }
-  40%     { transform: translate(91px, 70px); }
-  52%,100%{ transform: translate(91px, 66px); }
+  0%      { transform: translate(160px, 100px); }
+  28%     { transform: translate(99px, 98px); }
+  40%     { transform: translate(99px, 100px); }
+  52%,100%{ transform: translate(99px, 98px); }
 }
 @keyframes s3BtnClick {
   0%,36%  { transform: scale(1); }
@@ -576,19 +544,24 @@ nav {
   55%     { transform: scale(1.03); }
   62%,100%{ transform: scale(1); }
 }
-@keyframes s3CardFly {
-  0%,42%  { transform: scale(0); opacity:0; }
-  47%     { transform: scale(0.35); opacity:1; }
-  72%,100%{ transform: scale(1); opacity:1; }
+@keyframes s3BarFill {
+  0%,38%  { transform: scaleX(0); }
+  88%,100%{ transform: scaleX(1); }
+}
+@keyframes s3CardAppear {
+  0%,72%  { transform: scale(0); opacity:0; }
+  80%     { transform: scale(1.1); opacity:1; }
+  90%,100%{ transform: scale(1); opacity:1; }
 }
 @keyframes s3Check {
-  0%,70%  { stroke-dashoffset: 50; opacity:0; }
+  0%,70%  { stroke-dashoffset: 30; opacity:0; }
   76%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
 .hiw-steps.animated .s3-cursor { animation: s3CursorClick 2s 4.8s cubic-bezier(.4,0,.2,1) both; }
 .hiw-steps.animated .s3-btn    { animation: s3BtnClick    2s 4.8s cubic-bezier(.4,0,.2,1) both; }
-.hiw-steps.animated .s3-card   { animation: s3CardFly     2s 4.8s cubic-bezier(.16,1,.3,1) both; }
+.hiw-steps.animated .s3-bar    { animation: s3BarFill     2s 4.8s cubic-bezier(.4,0,.2,1) both; }
+.hiw-steps.animated .s3-card   { animation: s3CardAppear  2s 4.8s cubic-bezier(.16,1,.3,1) both; }
 .hiw-steps.animated .s3-check  { animation: s3Check       2s 4.8s both; }
 .step-body {
   padding: 28px 32px 36px;
@@ -1382,19 +1355,34 @@ footer {
   <div class="hiw-steps">
     <div class="step-card">
       <div class="step-svg-wrap">
-        <div class="browser-chrome"><div class="browser-dots"><span></span><span></span><span></span></div><div class="browser-bar"></div></div>
-        <svg class="step-svg" viewBox="0 0 200 100">
-          <!-- list items -->
-          <rect x="28" y="10" width="110" height="14" rx="5" class="s1-li1" fill="var(--border)"/>
-          <rect x="28" y="30" width="90" height="14" rx="5" class="s1-li2" fill="var(--border)"/>
-          <rect x="28" y="50" width="100" height="14" rx="5" class="s1-li3" fill="var(--border)"/>
-          <!-- dot on 3rd item -->
-          <circle cx="18" cy="57" r="4" class="s1-dot3" fill="var(--text-muted)"/>
-          <!-- ripple on click -->
-          <circle cx="78" cy="57" r="10" fill="none" stroke="var(--accent)" stroke-width="1.5" class="s1-ripple" style="transform-origin:78px 57px;"/>
-          <!-- cursor -->
-          <g class="s1-cursor" style="transform:translate(146px,8px)">
-            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <svg class="step-svg" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
+          <!-- Title bar -->
+          <rect x="0" y="0" width="200" height="14" fill="rgba(17,17,18,0.08)"/>
+          <circle cx="8" cy="7" r="2.5" fill="#E7564E"/>
+          <circle cx="15" cy="7" r="2.5" fill="#F7C154"/>
+          <circle cx="22" cy="7" r="2.5" fill="#69D353"/>
+          <rect x="65" y="2" width="70" height="10" rx="5" fill="rgba(17,17,18,0.08)"/>
+          <line x1="0" y1="14" x2="200" y2="14" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+          <!-- Sidebar -->
+          <rect x="0" y="14" width="48" height="106" fill="rgba(17,17,18,0.04)"/>
+          <line x1="48" y1="14" x2="48" y2="120" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+          <!-- Sidebar list items (animated) -->
+          <rect x="6" y="22" width="36" height="7" rx="3" class="s1-li1" fill="var(--border)"/>
+          <rect x="6" y="35" width="28" height="7" rx="3" class="s1-li2" fill="var(--border)"/>
+          <rect x="6" y="48" width="32" height="7" rx="3" class="s1-li3" fill="var(--border)"/>
+          <rect x="6" y="61" width="24" height="7" rx="3" fill="var(--border)"/>
+          <rect x="6" y="74" width="30" height="7" rx="3" fill="var(--border)"/>
+          <!-- Selection dot on item 3 -->
+          <circle cx="3" cy="51.5" r="2" class="s1-dot3" fill="var(--accent)" style="opacity:0;"/>
+          <!-- Content area skeleton -->
+          <rect x="56" y="22" width="80" height="8" rx="3" fill="rgba(17,17,18,0.06)"/>
+          <rect x="56" y="36" width="60" height="6" rx="3" fill="rgba(17,17,18,0.04)"/>
+          <rect x="56" y="48" width="100" height="44" rx="6" fill="rgba(17,17,18,0.04)"/>
+          <!-- Ripple on item 3 click -->
+          <circle cx="22" cy="51.5" r="8" fill="none" stroke="var(--accent)" stroke-width="1.2" class="s1-ripple" style="transform-origin:22px 51.5px; transform:scale(0);"/>
+          <!-- Cursor -->
+          <g class="s1-cursor" style="transform:translate(170px,95px)">
+            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
         </svg>
       </div>
@@ -1406,21 +1394,37 @@ footer {
     </div>
     <div class="step-card">
       <div class="step-svg-wrap">
-        <div class="browser-chrome"><div class="browser-dots"><span></span><span></span><span></span></div><div class="browser-bar"></div></div>
-        <svg class="step-svg" viewBox="0 0 200 100">
-          <!-- drop zone (right) -->
-          <rect x="118" y="18" width="62" height="64" rx="8" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
-          <!-- thumbnail group (both rects move together) -->
+        <svg class="step-svg" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
+          <!-- Title bar -->
+          <rect x="0" y="0" width="200" height="14" fill="rgba(17,17,18,0.08)"/>
+          <circle cx="8" cy="7" r="2.5" fill="#E7564E"/>
+          <circle cx="15" cy="7" r="2.5" fill="#F7C154"/>
+          <circle cx="22" cy="7" r="2.5" fill="#69D353"/>
+          <rect x="65" y="2" width="70" height="10" rx="5" fill="rgba(17,17,18,0.08)"/>
+          <line x1="0" y1="14" x2="200" y2="14" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+          <!-- Sidebar -->
+          <rect x="0" y="14" width="48" height="106" fill="rgba(17,17,18,0.04)"/>
+          <line x1="48" y1="14" x2="48" y2="120" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+          <!-- Sidebar static items -->
+          <rect x="6" y="56" width="24" height="7" rx="3" fill="var(--border)"/>
+          <rect x="6" y="69" width="30" height="7" rx="3" fill="var(--border)"/>
+          <rect x="6" y="82" width="20" height="7" rx="3" fill="var(--border)"/>
+          <!-- Drop zone in content area -->
+          <rect x="58" y="26" width="80" height="60" rx="8" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
+          <!-- Drop zone plus icon -->
+          <line x1="98" y1="51" x2="98" y2="61" stroke="rgba(17,17,18,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="93" y1="56" x2="103" y2="56" stroke="rgba(17,17,18,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Thumbnail in sidebar (draggable) -->
           <g class="s2-thumb">
-            <rect x="20" y="23" width="56" height="56" rx="8" fill="rgba(200,230,46,0.35)"/>
-            <rect x="28" y="31" width="40" height="28" rx="5" fill="rgba(200,230,46,0.5)"/>
+            <rect x="6" y="22" width="36" height="28" rx="5" fill="rgba(200,230,46,0.35)"/>
+            <rect x="11" y="26" width="26" height="16" rx="3" fill="rgba(200,230,46,0.55)"/>
           </g>
-          <!-- cursor follows thumb -->
-          <g class="s2-cursor" style="transform:translate(68px,28px); opacity:0;">
-            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+          <!-- Cursor -->
+          <g class="s2-cursor" style="transform:translate(22px,34px); opacity:0;">
+            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
-          <!-- check in zone -->
-          <polyline points="131,52 141,62 158,42" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
+          <!-- Check in drop zone -->
+          <polyline points="75,58 85,68 110,45" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:60;stroke-dashoffset:60;"/>
         </svg>
       </div>
       <div class="step-body">
@@ -1431,22 +1435,43 @@ footer {
     </div>
     <div class="step-card">
       <div class="step-svg-wrap">
-        <div class="browser-chrome"><div class="browser-dots"><span></span><span></span><span></span></div><div class="browser-bar"></div></div>
-        <svg class="step-svg" viewBox="0 0 200 100">
-          <!-- button -->
-          <g class="s3-btn" style="transform-origin:100px 74px;">
-            <rect x="50" y="60" width="100" height="28" rx="14" fill="var(--accent)"/>
-            <rect x="68" y="70" width="64" height="8" rx="4" fill="rgba(17,17,18,0.25)"/>
+        <svg class="step-svg" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
+          <!-- Title bar -->
+          <rect x="0" y="0" width="200" height="14" fill="rgba(17,17,18,0.08)"/>
+          <circle cx="8" cy="7" r="2.5" fill="#E7564E"/>
+          <circle cx="15" cy="7" r="2.5" fill="#F7C154"/>
+          <circle cx="22" cy="7" r="2.5" fill="#69D353"/>
+          <rect x="65" y="2" width="70" height="10" rx="5" fill="rgba(17,17,18,0.08)"/>
+          <line x1="0" y1="14" x2="200" y2="14" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+          <!-- Sidebar -->
+          <rect x="0" y="14" width="48" height="106" fill="rgba(17,17,18,0.04)"/>
+          <line x1="48" y1="14" x2="48" y2="120" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+          <!-- Sidebar: first item highlighted (selected state) -->
+          <rect x="6" y="22" width="36" height="7" rx="3" fill="rgba(200,230,46,0.7)"/>
+          <rect x="6" y="35" width="28" height="7" rx="3" fill="var(--border)"/>
+          <rect x="6" y="48" width="32" height="7" rx="3" fill="var(--border)"/>
+          <rect x="6" y="61" width="24" height="7" rx="3" fill="var(--border)"/>
+          <!-- Content: image preview area -->
+          <rect x="56" y="22" width="92" height="48" rx="6" fill="rgba(200,230,46,0.18)"/>
+          <rect x="60" y="26" width="62" height="36" rx="4" fill="rgba(200,230,46,0.28)"/>
+          <!-- Progress bar track -->
+          <rect x="56" y="78" width="92" height="8" rx="4" fill="rgba(17,17,18,0.08)"/>
+          <!-- Progress bar fill (animated) -->
+          <rect x="56" y="78" width="92" height="8" rx="4" fill="var(--accent)" class="s3-bar" style="transform-origin:56px 82px; transform:scaleX(0);"/>
+          <!-- Completion indicator chip -->
+          <g class="s3-card" style="transform:scale(0); transform-origin:148px 82px; opacity:0;">
+            <rect x="139" y="75" width="18" height="14" rx="3" fill="var(--accent)"/>
           </g>
-          <!-- result card — scales out from button center to top-right -->
-          <g class="s3-card" style="transform:scale(0);transform-origin:100px 74px;opacity:0;">
-            <rect x="132" y="4" width="60" height="52" rx="8" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.2"/>
-            <rect x="140" y="12" width="44" height="28" rx="5" fill="rgba(200,230,46,0.4)"/>
-            <polyline points="143,47 150,54 163,38" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="s3-check" style="stroke-dasharray:50;stroke-dashoffset:50;"/>
+          <!-- Checkmark on completion chip -->
+          <polyline points="142,82 145,86 153,77" fill="none" stroke="#111112" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="s3-check" style="stroke-dasharray:30;stroke-dashoffset:30;"/>
+          <!-- Button -->
+          <g class="s3-btn" style="transform-origin:101px 100px;">
+            <rect x="66" y="92" width="70" height="16" rx="8" fill="var(--accent)"/>
+            <rect x="80" y="98" width="42" height="4" rx="2" fill="rgba(17,17,18,0.2)"/>
           </g>
-          <!-- cursor -->
-          <g class="s3-cursor" style="transform:translate(168px,84px);">
-            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+          <!-- Cursor -->
+          <g class="s3-cursor" style="transform:translate(160px,100px);">
+            <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
         </svg>
       </div>
@@ -1551,12 +1576,16 @@ footer {
     <button class="btn-outline">Смотреть все</button>
   </div>
   <div class="gallery-grid">
-    <div class="gallery-card"><img src="assets/1Ma21.webp" alt="Стеклянная архитектура" loading="lazy"></div>
-    <div class="gallery-card"><img src="assets/FcE6Y.webp" alt="Капли на стекле" loading="lazy"></div>
-    <div class="gallery-card"><img src="assets/QLP2k.webp" alt="Космический портал" loading="lazy"></div>
-    <div class="gallery-card"><img src="assets/VdhjG.webp" alt="Гиперпространство" loading="lazy"></div>
-    <div class="gallery-card"><img src="assets/ZgSf5.webp" alt="Стеклянная сфера" loading="lazy"></div>
-    <div class="gallery-card"><img src="assets/TexfK.webp" alt="Стеклянный коридор" loading="lazy"></div>
+    <div class="gallery-row">
+      <div class="gallery-card"><img src="assets/1Ma21.webp" alt="Стеклянная архитектура" loading="lazy"></div>
+      <div class="gallery-card"><img src="assets/FcE6Y.webp" alt="Капли на стекле" loading="lazy"></div>
+      <div class="gallery-card"><img src="assets/QLP2k.webp" alt="Космический портал" loading="lazy"></div>
+    </div>
+    <div class="gallery-row">
+      <div class="gallery-card"><img src="assets/VdhjG.webp" alt="Гиперпространство" loading="lazy"></div>
+      <div class="gallery-card"><img src="assets/ZgSf5.webp" alt="Стеклянная сфера" loading="lazy"></div>
+      <div class="gallery-card"><img src="assets/TexfK.webp" alt="Стеклянный коридор" loading="lazy"></div>
+    </div>
   </div>
 </section>
 
