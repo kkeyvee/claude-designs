@@ -220,7 +220,7 @@ nav {
   max-width: 1920px;
   padding: 0 var(--gutter);
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 48px;
 }
 .hero-headline {
@@ -235,7 +235,6 @@ nav {
 }
 .hero-right {
   flex: 1;
-  padding-top: 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -466,23 +465,26 @@ nav {
   84%     { transform: translate(26px, 55px); }
   100%    { transform: translate(26px, 53px); }
 }
+/* item 1: cursor hovers (light tint), then cursor leaves → back to normal */
 @keyframes s1Li1 {
-  0%,11%  { fill: var(--border); }
-  18%     { fill: #c8c6c0; }
-  36%     { fill: var(--border); }
+  0%,12%  { fill: var(--border); }
+  18%,32% { fill: rgba(17,17,18,0.14); }
+  38%     { fill: var(--border); }
   100%    { fill: var(--border); }
 }
+/* item 2: same hover pattern */
 @keyframes s1Li2 {
-  0%,42%  { fill: var(--border); }
-  50%     { fill: #c8c6c0; }
-  62%     { fill: var(--border); }
+  0%,44%  { fill: var(--border); }
+  50%,58% { fill: rgba(17,17,18,0.14); }
+  64%     { fill: var(--border); }
   100%    { fill: var(--border); }
 }
+/* item 3: hover → bright flash on click → stays accent (selected) */
 @keyframes s1Li3 {
-  0%,66%  { fill: var(--border); }
-  73%     { fill: #c8c6c0; }
-  82%     { fill: rgba(160,196,20,0.65); }
-  89%,100%{ fill: #C8E62E; }
+  0%,68%  { fill: var(--border); }
+  74%,80% { fill: rgba(17,17,18,0.14); }
+  84%     { fill: #fff; }
+  90%,100%{ fill: #C8E62E; }
 }
 @keyframes s1DotSelect {
   0%,84%  { opacity: 0; }
@@ -500,11 +502,16 @@ nav {
 .hiw-steps.animated .s1-dot3   { animation: s1DotSelect 2s 0s both; }
 .hiw-steps.animated .s1-ripple { transform-origin: 28px 55px; animation: s1Ripple 2s 0s both; }
 
-/* ── STEP 2: image flies in from below → fills drop zone → checkmark ── */
+/* ── STEP 2: cursor drags image up from below into drop zone → checkmark ── */
 @keyframes s2Drag {
   0%,5%   { transform: translateY(96px); opacity:0; }
   12%     { transform: translateY(96px); opacity:1; }
   72%,100%{ transform: translateY(0); }
+}
+@keyframes s2CursorDrag {
+  0%,5%   { transform: translate(119px, 116px); opacity:0; }
+  12%     { transform: translate(119px, 116px); opacity:1; }
+  72%,100%{ transform: translate(119px, 62px); opacity:1; }
 }
 @keyframes s2Zone {
   0%,60%  { stroke: var(--border); fill: transparent; }
@@ -515,7 +522,8 @@ nav {
   78%     { opacity:1; }
   100%    { stroke-dashoffset: 0; opacity:1; }
 }
-.hiw-steps.animated .s2-thumb  { animation: s2Drag  2s 2.4s cubic-bezier(.16,1,.3,1) both; }
+.hiw-steps.animated .s2-thumb  { animation: s2Drag       2s 2.4s cubic-bezier(.16,1,.3,1) both; }
+.hiw-steps.animated .s2-cursor { animation: s2CursorDrag 2s 2.4s cubic-bezier(.16,1,.3,1) both; }
 .hiw-steps.animated .s2-zone   { animation: s2Zone  2s 2.4s both; }
 .hiw-steps.animated .s2-check  { animation: s2Check 2s 2.4s both; }
 
@@ -1338,16 +1346,16 @@ footer {
 <section class="hiw" id="how">
   <div class="hiw-top">
     <h2 class="hiw-title">Результат за три простых действия</h2>
-    <p class="hiw-desc">Загружайте любое фото — нейросети сами определят контекст и предложат оптимальный результат. Без настроек, без кривой обучения.</p>
+    <p class="hiw-desc">Загружайте любое фото — нейросети сами определят контекст и предложат оптимальный результат.</p>
   </div>
   <div class="hiw-steps">
     <div class="step-card">
       <div class="step-svg-wrap">
         <svg class="step-svg" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <clipPath id="s1-clip"><rect x="8" y="8" width="184" height="104" rx="8"/></clipPath>
+            <clipPath id="s1-clip"><rect x="8" y="8" width="184" height="140" rx="8"/></clipPath>
           </defs>
-          <rect x="8" y="8" width="184" height="104" rx="8" fill="rgba(17,17,18,0.04)"/>
+          <rect x="8" y="8" width="184" height="140" rx="8" fill="rgba(17,17,18,0.04)"/>
           <g clip-path="url(#s1-clip)">
             <!-- Title bar -->
             <rect x="8" y="8" width="184" height="16" fill="rgba(17,17,18,0.07)"/>
@@ -1357,8 +1365,8 @@ footer {
             <rect x="73" y="11" width="54" height="8" rx="4" fill="rgba(17,17,18,0.08)"/>
             <line x1="8" y1="24" x2="192" y2="24" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
             <!-- Sidebar -->
-            <rect x="8" y="24" width="44" height="88" fill="rgba(17,17,18,0.04)"/>
-            <line x1="52" y1="24" x2="52" y2="112" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+            <rect x="8" y="24" width="44" height="116" fill="rgba(17,17,18,0.04)"/>
+            <line x1="52" y1="24" x2="52" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
             <!-- Sidebar list items (animated) -->
             <rect x="14" y="30" width="32" height="6" rx="3" class="s1-li1" fill="var(--border)"/>
             <rect x="14" y="41" width="24" height="6" rx="3" class="s1-li2" fill="var(--border)"/>
@@ -1378,7 +1386,7 @@ footer {
               <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
             </g>
           </g>
-          <rect x="8" y="8" width="184" height="104" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
+          <rect x="8" y="8" width="184" height="140" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
         </svg>
       </div>
       <div class="step-body">
@@ -1391,9 +1399,9 @@ footer {
       <div class="step-svg-wrap">
         <svg class="step-svg" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <clipPath id="s2-clip"><rect x="8" y="8" width="184" height="104" rx="8"/></clipPath>
+            <clipPath id="s2-clip"><rect x="8" y="8" width="184" height="140" rx="8"/></clipPath>
           </defs>
-          <rect x="8" y="8" width="184" height="104" rx="8" fill="rgba(17,17,18,0.04)"/>
+          <rect x="8" y="8" width="184" height="140" rx="8" fill="rgba(17,17,18,0.04)"/>
           <g clip-path="url(#s2-clip)">
             <!-- Title bar -->
             <rect x="8" y="8" width="184" height="16" fill="rgba(17,17,18,0.07)"/>
@@ -1403,27 +1411,31 @@ footer {
             <rect x="73" y="11" width="54" height="8" rx="4" fill="rgba(17,17,18,0.08)"/>
             <line x1="8" y1="24" x2="192" y2="24" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
             <!-- Sidebar -->
-            <rect x="8" y="24" width="44" height="88" fill="rgba(17,17,18,0.04)"/>
-            <line x1="52" y1="24" x2="52" y2="112" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+            <rect x="8" y="24" width="44" height="116" fill="rgba(17,17,18,0.04)"/>
+            <line x1="52" y1="24" x2="52" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
             <!-- Sidebar static items -->
             <rect x="14" y="30" width="30" height="6" rx="3" fill="rgba(200,230,46,0.6)"/>
             <rect x="14" y="41" width="22" height="6" rx="3" fill="var(--border)"/>
             <rect x="14" y="52" width="26" height="6" rx="3" fill="var(--border)"/>
             <rect x="14" y="63" width="18" height="6" rx="3" fill="var(--border)"/>
-            <!-- Drop zone (dashed, animated) -->
-            <rect x="56" y="28" width="132" height="80" rx="8" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
+            <!-- Drop zone (dashed, animated) — same size as thumbnail -->
+            <rect x="62" y="30" width="118" height="68" rx="8" stroke-width="1.5" stroke-dasharray="5 3" class="s2-zone" fill="transparent" stroke="var(--border)"/>
             <!-- Drop zone plus icon -->
-            <line x1="122" y1="63" x2="122" y2="73" stroke="rgba(17,17,18,0.18)" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="117" y1="68" x2="127" y2="68" stroke="rgba(17,17,18,0.18)" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Thumbnail flying in from below -->
+            <line x1="121" y1="59" x2="121" y2="69" stroke="rgba(17,17,18,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="116" y1="64" x2="126" y2="64" stroke="rgba(17,17,18,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Thumbnail flying in from below (same size as drop zone) -->
             <g class="s2-thumb" style="transform:translateY(96px);">
-              <rect x="56" y="28" width="132" height="80" rx="8" fill="rgba(200,230,46,0.35)"/>
-              <rect x="62" y="34" width="88" height="52" rx="6" fill="rgba(200,230,46,0.55)"/>
+              <rect x="62" y="30" width="118" height="68" rx="8" fill="rgba(200,230,46,0.35)"/>
+              <rect x="68" y="36" width="80" height="48" rx="6" fill="rgba(200,230,46,0.55)"/>
             </g>
-            <!-- Checkmark (large, centered in drop zone) -->
-            <polyline points="102,68 116,82 140,50" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:70;stroke-dashoffset:70;"/>
+            <!-- Cursor (drags thumb upward) -->
+            <g class="s2-cursor" style="transform:translate(119px,116px); opacity:0;">
+              <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+            </g>
+            <!-- Checkmark centered in drop zone -->
+            <polyline points="104,64 117,78 138,46" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="s2-check" style="stroke-dasharray:70;stroke-dashoffset:70;"/>
           </g>
-          <rect x="8" y="8" width="184" height="104" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
+          <rect x="8" y="8" width="184" height="140" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
         </svg>
       </div>
       <div class="step-body">
@@ -1436,9 +1448,9 @@ footer {
       <div class="step-svg-wrap">
         <svg class="step-svg" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <clipPath id="s3-clip"><rect x="8" y="8" width="184" height="104" rx="8"/></clipPath>
+            <clipPath id="s3-clip"><rect x="8" y="8" width="184" height="140" rx="8"/></clipPath>
           </defs>
-          <rect x="8" y="8" width="184" height="104" rx="8" fill="rgba(17,17,18,0.04)"/>
+          <rect x="8" y="8" width="184" height="140" rx="8" fill="rgba(17,17,18,0.04)"/>
           <g clip-path="url(#s3-clip)">
             <!-- Title bar -->
             <rect x="8" y="8" width="184" height="16" fill="rgba(17,17,18,0.07)"/>
@@ -1448,8 +1460,8 @@ footer {
             <rect x="73" y="11" width="54" height="8" rx="4" fill="rgba(17,17,18,0.08)"/>
             <line x1="8" y1="24" x2="192" y2="24" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
             <!-- Sidebar -->
-            <rect x="8" y="24" width="44" height="88" fill="rgba(17,17,18,0.04)"/>
-            <line x1="52" y1="24" x2="52" y2="112" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
+            <rect x="8" y="24" width="44" height="116" fill="rgba(17,17,18,0.04)"/>
+            <line x1="52" y1="24" x2="52" y2="148" stroke="rgba(17,17,18,0.1)" stroke-width="0.5"/>
             <!-- Sidebar: first item highlighted -->
             <rect x="14" y="30" width="32" height="6" rx="3" fill="rgba(200,230,46,0.7)"/>
             <rect x="14" y="41" width="24" height="6" rx="3" fill="var(--border)"/>
@@ -1477,7 +1489,7 @@ footer {
               <path d="M2,2 L2,16 L5,13 L8,18 L10,17 L8,12 L12,12 Z" fill="#111112" stroke="white" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
             </g>
           </g>
-          <rect x="8" y="8" width="184" height="104" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
+          <rect x="8" y="8" width="184" height="140" rx="8" fill="none" stroke="rgba(17,17,18,0.12)" stroke-width="0.75"/>
         </svg>
       </div>
       <div class="step-body">
