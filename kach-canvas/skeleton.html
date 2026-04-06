@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>КАЧ Канвас</title>
+<style>
+  @font-face { font-family: 'Cygre'; src: local('Cygre'); font-weight: 400; }
+  @font-face { font-family: 'Cygre'; src: local('Cygre Book'); font-weight: 350; }
+  @font-face { font-family: 'Cygre'; src: local('Cygre Medium'); font-weight: 500; }
+  @font-face { font-family: 'Cygre'; src: local('Cygre SemiBold'); font-weight: 600; }
+  @font-face { font-family: 'Cygre'; src: local('Cygre Bold'); font-weight: 700; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Cygre', Georgia, serif; color: #000; background: #fff; -webkit-font-smoothing: antialiased; width: 1920px; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+
+  .page { width: 1920px; display: flex; flex-direction: column; gap: 240px; }
+
+  /* ═══ STICKY NAV (glass) ═══ */
+  .sticky-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    min-width: 1920px; z-index: 100;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  }
+  .sticky-nav--visible { opacity: 1; pointer-events: auto; }
+  .sticky-nav__inner { width: 1580px; margin: 0 auto; display: flex; align-items: center; padding: 16px 0; }
+  .sticky-nav__logo { display: flex; align-items: center; gap: 16px; }
+  .sticky-nav__name { font-weight: 600; font-size: 16px; white-space: nowrap; }
+  .sticky-nav__sep { width: 1px; height: 28px; background: rgba(0,0,0,0.2); flex-shrink: 0; }
+  .sticky-nav__desc { font-weight: 400; font-size: 11px; line-height: 1.3; opacity: 0.4; max-width: 220px; }
+  .sticky-nav__links { display: flex; gap: 40px; margin: 0 auto; }
+  .sticky-nav__links .nav-link { transition: opacity 0.3s ease; }
+  .sticky-nav__links .nav-link--active { opacity: 1; border-bottom-color: #000; }
+  .sticky-nav__cta { margin-left: auto; }
+
+  /* ═══ HERO 1920×1127 ═══ */
+  .hero { width: 1920px; height: 100vh; position: relative; }
+  .hero-image { position: absolute; top: 0; left: 0; right: 0; bottom: 320px; background: #d9d9d9; border-radius: 0 0 10px 10px; }
+  /* «кач канвас» — 28px Medium, opacity 0.6 */
+  .hero-bottom { position: absolute; bottom: 40px; left: 170px; right: 170px; display: flex; align-items: flex-start; }
+  .hero-label { font-weight: 500; font-size: 28px; line-height: 100%; opacity: 0.6; width: 538px; flex-shrink: 0; }
+  .hero-info { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+  .hero-title { font-weight: 400; font-size: 52px; line-height: 94%; }
+  .hero-desc { width: 464px; font-weight: 350; font-size: 22px; line-height: 140%; opacity: 0.5; }
+  .hero-btn { height: 44px; display: inline-flex; align-items: center; padding: 0 24px; background: #C8E62E; border-radius: 10px; font-weight: 600; font-size: 14px; margin-left: auto; align-self: flex-end; }
+
+  /* Nav внутри hero */
+  .nav { display: none; }
+  .nav-logo { display: flex; align-items: center; gap: 16px; height: 70px; }
+  .nav-logo__name { font-weight: 600; font-size: 16px; white-space: nowrap; }
+  .nav-logo__sep { width: 1px; height: 28px; background: rgba(0,0,0,0.2); flex-shrink: 0; }
+  .nav-logo__desc { font-weight: 400; font-size: 11px; line-height: 1.3; opacity: 0.4; max-width: 220px; }
+  .nav-links { display: flex; gap: 100px; margin: 0 auto; }
+  /* Nav links — 14px Regular, opacity 0.4 */
+  .nav-link { font-size: 14px; font-weight: 400; opacity: 0.4; padding-bottom: 2px; border-bottom: 1px solid rgba(0,0,0,0.25); }
+  .nav-cta { padding: 10px 24px; background: #C8E62E; border-radius: 10px; font-size: 14px; font-weight: 600; }
+
+  /* ═══ PAINS (фичи) — 1920×542 ═══ */
+  .pains { width: 1920px; min-height: 542px; padding: 0 170px; }
+  .pains-header { display: flex; align-items: flex-start; margin-bottom: 57px; }
+  /* Label — 28px Medium, opacity 0.6, width 311 */
+  .pains-label { font-weight: 500; font-size: 28px; line-height: 100%; opacity: 0.6; width: 311px; flex-shrink: 0; }
+  .pains-desc-area { flex: 1; display: flex; gap: 53px; padding-left: 231px; }
+  /* Desc — 16px Regular, opacity 0.5 */
+  .pains-desc { font-weight: 400; font-size: 22px; line-height: 130%; opacity: 0.5; flex: 1; }
+  .pains-list { display: flex; flex-direction: column; padding-left: 542px; }
+  /* Pain items — 36px SemiBold, height 85px each */
+  .pain-item { display: flex; align-items: center; justify-content: space-between; height: 105px; border-top: 1px solid #e0e0e0; font-weight: 600; font-size: 36px; }
+  .pain-item:last-child { border-bottom: 1px solid #e0e0e0; }
+  /* Dots — 22×22 */
+  .pain-dot { width: 22px; height: 22px; background: #C8E62E; border-radius: 50%; flex-shrink: 0; }
+
+  /* ═══ SHOWCASE — 1920×1237 ═══ */
+  .showcase { width: 1920px; height: 1237px; background: #b0b0b0; }
+
+  /* ═══ AGENTS — 1920×416 ═══ */
+  .agents { width: 1920px; min-height: 416px; padding: 0 170px; padding-bottom: 120px; }
+  .agents-header { display: flex; align-items: flex-start; margin-bottom: 23px; }
+  /* Label — 28px Medium, opacity 0.6, width 542 */
+  .agents-label { font-weight: 500; font-size: 28px; line-height: 100%; opacity: 0.6; width: 542px; flex-shrink: 0; }
+  /* Desc — 16px Regular, opacity 0.5 */
+  .agents-desc { font-weight: 400; font-size: 22px; line-height: 130%; opacity: 0.5; max-width: 542px; margin-left: 0; }
+  .agents-list { display: flex; flex-direction: column; padding-left: 542px; }
+  .agent-row { position: relative; height: 108px; display: flex; align-items: center; cursor: pointer; }
+  .agent-row-bg { position: absolute; top: 0; bottom: 0; left: calc(-542px - 170px); width: 1920px; background: #f0f0f0; opacity: 0; transition: opacity 0.3s ease; z-index: 0; }
+  .agent-row:hover .agent-row-bg { opacity: 1; }
+  .agent-row-content { position: relative; z-index: 1; display: flex; align-items: center; width: 100%; }
+  /* Tag — 16px Regular, opacity 0 → 0.4 on hover */
+  .agent-tag { font-weight: 400; font-size: 16px; opacity: 0; transition: opacity 0.3s ease; position: absolute; left: -542px; }
+  .agent-row:hover .agent-tag { opacity: 0.4; }
+  /* Agent name — 48px Regular */
+  .agent-name { font-weight: 400; font-size: 48px; line-height: 65px; letter-spacing: -0.01em; }
+  /* Thumb — rotated, appears on hover */
+  .agent-thumb { width: 283px; height: 293px; background: #d9d9d9; border-radius: 10px; transform: rotate(-15.6deg); position: absolute; right: 0; top: -80px; opacity: 0; transition: opacity 0.4s ease; z-index: 2; pointer-events: none; }
+  .agent-row:hover .agent-thumb { opacity: 1; }
+
+  /* ═══ FACTS — 1920×617 ═══ */
+  .facts { width: 1920px; min-height: 617px; padding: 0 170px; }
+  /* Label — 28px Medium, opacity 0.6 */
+  .facts-label { font-weight: 500; font-size: 28px; line-height: 100%; opacity: 0.6; margin-bottom: 28px; }
+  .facts-grid { display: flex; gap: 44px; }
+  .fact-card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 44px; display: flex; flex-direction: column; height: 555px; }
+  .fact-card:first-child { width: 497px; flex-shrink: 0; }
+  .fact-card:not(:first-child) { flex: 1; }
+  /* Num — 28px Bold */
+  .fact-num { font-weight: 700; font-size: 28px; }
+  .fact-spacer { flex: 1; }
+  /* Text — 22px Regular */
+  .fact-text { font-weight: 400; font-size: 22px; line-height: 130%; }
+  .fact-card { position: relative; overflow: hidden; transition: border-color 0.3s ease; }
+  .fact-card__bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; z-index: 0; }
+  .fact-num, .fact-spacer { position: relative; z-index: 1; }
+  .fact-text { position: relative; z-index: 1; }
+  .fact-card--featured .fact-card__bg { opacity: 1; }
+  .fact-card--featured { border-color: transparent; }
+  .fact-card--featured .fact-text { background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 12px 16px; border-radius: 10px; margin: -12px -16px; }
+
+  /* ═══ CTA — 1920×523 ═══ */
+  .cta { width: 1920px; height: 523px; position: relative; }
+  /* Title — 72px Regular */
+  .cta-title { position: absolute; left: 712px; top: 64px; font-weight: 400; font-size: 72px; line-height: 94%; letter-spacing: -0.02em; }
+  /* Desc — 16px Regular, opacity 0.5 */
+  .cta-desc { position: absolute; left: 712px; top: 219px; width: 542px; font-weight: 400; font-size: 22px; line-height: 130%; opacity: 0.5; }
+  /* Btn — 18px SemiBold */
+  .cta-btn { position: absolute; left: 712px; top: 330px; display: inline-flex; align-items: center; padding: 0 24px; height: 44px; background: #C8E62E; border-radius: 10px; font-weight: 600; font-size: 14px; }
+
+  /* ═══ FOOTER — 1920×106 ═══ */
+  .footer { width: 1920px; height: 20px; background: #2a2a2a; margin-top: 240px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ STICKY NAV ═══ -->
+<nav class="sticky-nav">
+  <div class="sticky-nav__inner">
+    <div class="sticky-nav__logo">
+      <span class="sticky-nav__name">КАЧ Канвас</span>
+      <span class="sticky-nav__sep"></span>
+      <span class="sticky-nav__desc">Комфортное пространство<br>для профессионального дизайна</span>
+    </div>
+    <div class="sticky-nav__links">
+      <a class="nav-link" href="#pains">Фичи</a>
+      <a class="nav-link" href="#showcase">Галерея</a>
+      <a class="nav-link" href="#agents">Агенты</a>
+      <a class="nav-link" href="#facts">О сервисе</a>
+      <a class="nav-link" href="#cta">Начать</a>
+    </div>
+    <div class="sticky-nav__cta"><a class="nav-cta" href="#">Перейти в Канвас</a></div>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <nav class="nav">
+    <div class="nav-logo">
+      <div class="nav-logo__name">КАЧ Канвас</div>
+      <div class="nav-logo__sep"></div>
+      <div class="nav-logo__desc">Комфортное пространство<br>для профессионального дизайна</div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#">Витрина решений</a>
+      <a class="nav-link" href="#">Как это работает</a>
+      <a class="nav-link" href="#">Галерея</a>
+      <a class="nav-link" href="#">Цены</a>
+      <a class="nav-link" href="#">Авторизация</a>
+    </div>
+    <a class="nav-cta" href="#">Перейти в Канвас</a>
+  </nav>
+  <div class="hero-image"></div>
+  <div class="hero-bottom">
+    <div class="hero-label">кач канвас</div>
+    <div class="hero-info">
+      <h1 class="hero-title">Креативная команда<br>в одном канвасе.</h1>
+      <p class="hero-desc">Не нужно знать модели и быть инженером. Достаточно знать, чего ты хочешь. Ты направляешь — нейросети исполняют. Без промптов, без настроек.</p>
+    </div>
+    <a class="hero-btn" href="#">Перейти в Канвас</a>
+  </div>
+</section>
+
+<!-- ═══ PAINS ═══ -->
+<section class="pains" id="pains">
+  <div class="pains-header">
+    <div class="pains-label">фичи</div>
+    <div class="pains-desc-area">
+      <div class="pains-desc">Мы не считаем, что дизайнер должен разбираться в моделях, помнить синтаксис</div>
+      <div class="pains-desc">промптов и платить за десять подписок. Поэтому мы сделали КАЧ Канвас.</div>
+    </div>
+  </div>
+  <div class="pains-list">
+    <div class="pain-item"><span>Заменяем 10 вкладок одним канвасом</span><div class="pain-dot"></div></div>
+    <div class="pain-item"><span>Не нужно платить за все подписки отдельно</span><div class="pain-dot"></div></div>
+    <div class="pain-item"><span>Выбираешь задачу, а не название модели</span><div class="pain-dot"></div></div>
+    <div class="pain-item"><span>Регулярно добавляем новые и топовые модели</span><div class="pain-dot"></div></div>
+    <div class="pain-item"><span>Промпты уже написаны и отточены</span><div class="pain-dot"></div></div>
+    <div class="pain-item"><span>Обновляем модели сами</span><div class="pain-dot"></div></div>
+  </div>
+</section>
+
+<!-- ═══ SHOWCASE ═══ -->
+<div class="showcase" id="showcase"></div>
+
+<!-- ═══ AGENTS ═══ -->
+<section class="agents" id="agents">
+  <div class="agents-header">
+    <div class="agents-label">агентский подход</div>
+    <div class="agents-desc">В репертуаре канваса есть не только модели, но и полноценные агенты, которые могут заменить работу целого креативного отдела</div>
+  </div>
+  <div class="agents-list">
+    <div class="agent-row">
+      <div class="agent-row-bg"></div>
+      <div class="agent-row-content">
+        <div class="agent-tag">генерирует идеи</div>
+        <div class="agent-name">агент-стратег</div>
+      </div>
+      <div class="agent-thumb"></div>
+    </div>
+    <div class="agent-row">
+      <div class="agent-row-bg"></div>
+      <div class="agent-row-content">
+        <div class="agent-tag">создаёт концепции</div>
+        <div class="agent-name">агент-креативный директор</div>
+      </div>
+      <div class="agent-thumb"></div>
+    </div>
+    <div class="agent-row">
+      <div class="agent-row-bg"></div>
+      <div class="agent-row-content">
+        <div class="agent-tag">оформляет визуал</div>
+        <div class="agent-name">агент-дизайнер</div>
+      </div>
+      <div class="agent-thumb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FACTS ═══ -->
+<section class="facts" id="facts">
+  <div class="facts-label">есть всё для начала работы</div>
+  <div class="facts-grid">
+    <div class="fact-card fact-card--featured"><div class="fact-card__bg" style="background-image:url('img/dog.png')"></div><div class="fact-num">1</div><div class="fact-spacer"></div><div class="fact-text">Работает из России без VPN и костылей</div></div>
+    <div class="fact-card"><div class="fact-num">2</div><div class="fact-spacer"></div><div class="fact-text">Российские карты для оплаты</div></div>
+    <div class="fact-card"><div class="fact-num">3</div><div class="fact-spacer"></div><div class="fact-text">Хранение данных на серверах РФ</div></div>
+    <div class="fact-card"><div class="fact-num">4</div><div class="fact-spacer"></div><div class="fact-text">Стабильный быстрый доступ</div></div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta" id="cta">
+  <h2 class="cta-title">Можно<br>начинать</h2>
+  <p class="cta-desc">Всё, чего так не хватало, уже здесь — в одном канвасе.</p>
+  <a class="cta-btn" href="#">Перейти в Канвас</a>
+</section>
+
+</div>
+
+<div class="footer"></div>
+
+<script>
+  // Zoom to fit
+  function zoomToFit() {
+    const vw = window.innerWidth;
+    document.body.style.zoom = vw < 1920 ? vw / 1920 : '';
+  }
+  zoomToFit();
+  window.addEventListener('resize', zoomToFit);
+
+  // Sticky nav
+  const stickyNav = document.querySelector('.sticky-nav');
+  const hero = document.querySelector('.hero');
+  new IntersectionObserver(([e]) => {
+    stickyNav.classList.toggle('sticky-nav--visible', !e.isIntersecting);
+  }, { threshold: 0 }).observe(hero);
+
+  // Active section highlight
+  const navLinks = document.querySelectorAll('.sticky-nav__links .nav-link');
+  const sections = document.querySelectorAll('#pains, #showcase, #agents, #facts, #cta');
+  const sectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('nav-link--active'));
+        const active = document.querySelector(`.sticky-nav__links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('nav-link--active');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => sectionObs.observe(s));
+</script>
+</body>
+</html>
