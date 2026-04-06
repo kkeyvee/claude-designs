@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /send.php
-
-# Sitemap (раскомментируйте и укажите свой домен)
-# Sitemap: https://yourdomain.ru/sitemap.xml
